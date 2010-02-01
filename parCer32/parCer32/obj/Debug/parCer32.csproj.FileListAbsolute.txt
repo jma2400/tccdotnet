@@ -1,0 +1,13 @@
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\bin\Debug\parCer32.exe
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\bin\Debug\parCer32.pdb
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\bin\Debug\AIMS.CodeEditor.dll
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\bin\Debug\AIMS.Docking.dll
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\bin\Debug\AIMS.Scripting.ScriptRun.dll
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\bin\Debug\AIMS.SyntaxDocument.dll
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\bin\Debug\AIMS.SyntaxFiles.dll
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.Form1.resources
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.Properties.Resources.resources
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.exe
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.pdb
