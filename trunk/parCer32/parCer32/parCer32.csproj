@@ -33,23 +33,23 @@
   <ItemGroup>
     <Reference Include="AIMS.CodeEditor, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Test\Project\bin\Release\AIMS.CodeEditor.dll</HintPath>
+      <HintPath>bin\Debug\AIMS.CodeEditor.dll</HintPath>
     </Reference>
     <Reference Include="AIMS.Docking, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Test\Project\bin\Release\AIMS.Docking.dll</HintPath>
+      <HintPath>bin\Debug\AIMS.Docking.dll</HintPath>
     </Reference>
     <Reference Include="AIMS.Scripting.ScriptRun, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Test\Project\bin\Release\AIMS.Scripting.ScriptRun.dll</HintPath>
+      <HintPath>bin\Debug\AIMS.Scripting.ScriptRun.dll</HintPath>
     </Reference>
     <Reference Include="AIMS.SyntaxDocument, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Test\Project\bin\Release\AIMS.SyntaxDocument.dll</HintPath>
+      <HintPath>bin\Debug\AIMS.SyntaxDocument.dll</HintPath>
     </Reference>
     <Reference Include="AIMS.SyntaxFiles, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Test\Project\bin\Release\AIMS.SyntaxFiles.dll</HintPath>
+      <HintPath>bin\Debug\AIMS.SyntaxFiles.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
