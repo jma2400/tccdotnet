@@ -1,0 +1,106 @@
+<% @TinyPG Namespace="parCer" Language="csharp" %>
+DIRECTIVE	-> @"<.+?>";
+DATATYPE	-> @"float|double|u?int|char|u?longlong|u?long|u?short";
+INCLUDE	-> @"include";
+VOID		-> @"void";
+SWITCH		-> @"switch";
+CASE		-> @"case";
+IF 		-> @"if";
+ELSE		-> @"else";
+FOR		-> @"for";
+WHILE		-> @"while";
+DEFAULT	-> @"default";
+RETURN		-> @"return";
+SCANF		-> @"scanf";
+PRINTF		-> @"printf";
+DO		-> @"do";
+BREAK         -> @"break";
+TYPESPEC	-> @"@?\""%[dfsc]\""";
+REFOPER	-> @"&";
+IDENTIFIER   	-> @"[a-zA-Z_][a-zA-Z0-9_]*";
+CHARIDENT	-> @"[a-zA-Z_]|[0-9_]";
+ARTOPERATOR	-> @"\+|-|%|/|\*";
+NUMBER		-> @"[0-9]+";
+QUOT		-> @"\'";
+DQUOT		-> @"\""";
+COMMA		-> @",";
+EQUALS		-> @"=";
+SEMICOL	-> @";";
+COLON		-> @":";
+SHARP 		-> @"#";
+EOF		-> @"^$";
+LPAREN		-> @"\(";
+RPAREN		-> @"\)";
+LBRACE		-> @"\{";
+RBRACE		-> @"\}";
+RELOP	       -> @">=|<=|==|!=|>|<";
+LOGOP		-> @"&&|\|\|";
+INCRE		-> @"\+\+|--";
+BOOL		-> @"true|false";
+NOT		-> @"!";
+NULL		-> @"";
+STRING        -> @"@?\""(\""\""|[^\""])*\""";
+
+
+[Skip]
+WHITESPACE  	-> @"\s+";
+[Skip]
+EOL		-> @"[\n\r]";
+[Skip]
+COMMENTLINE  	-> @"//[^\n]*\n?";
+[Skip]
+COMMENTBLOCK 	-> @"/\*[^*]*\*+(?:[^/*][^*]*\*+)*/";
+
+
+Start 		 -> Header+ Declaration* EOF;
+Header 	 -> SHARP INCLUDE DIRECTIVE;
+Declaration 	 -> Vreturn (Function?|DecAssignment?(COMMA IDENTIFIER DecAssignment?)* SEMICOL);
+Vreturn	 -> (DATATYPE|VOID)? IDENTIFIER;		
+
+//Function? is exluded from InsideDeclaration
+InsideDeclaration -> DATATYPE IDENTIFIER DecAssignment?(COMMA IDENTIFIER DecAssignment?)* SEMICOL;
+Assignment	 -> IDENTIFIER EQUALS Expr SEMICOL;
+DecAssignment	 -> EQUALS (Expr|Char);
+Expr 		 -> Atom (ARTOPERATOR Atom)*;
+Char		 -> QUOT CHARIDENT QUOT;
+Atom 		 -> NUMBER | IDENTIFIER | LPAREN Expr RPAREN;
+
+Function 	 -> LPAREN (Parameters|VOID) RPAREN CodeBlock;
+Parameters 	 -> ((DATATYPE IDENTIFIER)(COMMA DATATYPE IDENTIFIER)*)?;
+CodeBlock	 -> BOOL|(LBRACE Statement* RBRACE);
+Break		 -> BREAK SEMICOL;
+
+Switch		 -> SWITCH LPAREN IDENTIFIER RPAREN LBRACE SwitchCase RBRACE;
+SwitchCase	 -> ((CASE NUMBER COLON)* (DEFAULT COLON)? Statement?)* Statement*;
+Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|InsideDeclaration|Assignment|Break;
+
+If		 -> IF LPAREN (Condition) RPAREN IfForLoopBlock Else?;
+//Condition	 -> BOOL|(IDENTIFIER RELOP (IDENTIFIER|NUMBER)) (LOGOP Condition)?;
+
+Condition 	-> BOOL | (CondLogExpr (LOGOP CondLogExpr)*);
+CondLogExpr 	-> CondExpr (RELOP CondExpr)*;
+CondExpr	-> (IDENTIFIER|NUMBER) | NOT? LPAREN Condition RPAREN;
+
+//Condition	 -> BOOL|(IDENTIFIER RELOP (IDENTIFIER|NUMBER)) (LOGOP Condition)?;
+Else	 	 -> ELSE IfForLoopBlock;
+
+IfForLoopBlock -> (LBRACE Statement* RBRACE)|Statement;
+
+For		 -> FOR LPAREN (ForDeclaration|ForAssignment)? SEMICOL Condition? SEMICOL Increment? RPAREN IfForLoopBlock;
+//ForDeclaration and ForAssignment has no SEMICOL at the end
+ForDeclaration -> DATATYPE IDENTIFIER DecAssignment?(COMMA IDENTIFIER DecAssignment?)*;
+ForAssignment	 -> IDENTIFIER EQUALS Expr;
+Increment	 -> IDENTIFIER INCRE;
+
+While		 -> WHILE LPAREN (Condition) RPAREN WhileLoopBlock;
+
+DoWhile	 -> DO WhileLoopBlock WHILE LPAREN Condition RPAREN SEMICOL;
+
+//WhileLoopBlock enforces the use of { and } as compared to IfForLoopBlock
+WhileLoopBlock -> LBRACE Statement* RBRACE;
+
+Printf 	 -> PRINTF LPAREN STRING (COMMA (IDENTIFIER|NUMBER))* RPAREN SEMICOL;
+
+Scanf		 -> SCANF LPAREN TYPESPEC COMMA REFOPER IDENTIFIER RPAREN SEMICOL;
+
+Return		 -> RETURN Expr SEMICOL;
