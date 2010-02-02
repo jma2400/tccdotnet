@@ -40,7 +40,6 @@ namespace parCer32
         }
     }
 
-    
     public partial class ParseTree : ParseNode
     {
         public ParseErrors Errors;
@@ -74,12 +73,11 @@ namespace parCer32
             foreach (ParseNode n in node.Nodes)
                 PrintNode(sb, n, indent + 2);
         }
-        
-        
-        
-        
-        
-        
+ 
+        public object Eval(params object[] paramlist)
+        {
+            return Nodes[0].Eval(this, paramlist);
+        }
     }
 
     public partial class ParseNode
@@ -109,6 +107,304 @@ namespace parCer32
             this.text = text;
             this.nodes = new List<ParseNode>();
         }
+
+        protected object GetValue(ParseTree tree, TokenType type, int index)
+        {
+            return GetValue(tree, type, ref index);
+        }
+
+        protected object GetValue(ParseTree tree, TokenType type, ref int index)
+        {
+            object o = null;
+            if (index < 0) return o;
+
+       
+            foreach (ParseNode node in nodes)
+            {
+                if (node.Token.Type == type)
+                {
+                    index--;
+                    if (index < 0)
+                    {
+                        o = node.Eval(tree);
+                        break;
+                    }
+                }
+            }
+            return o;
+        }
+
+
+        internal object Eval(ParseTree tree, params object[] paramlist)
+        {
+            object Value = null;
+
+            switch (Token.Type)
+            {
+                case TokenType.Start:
+                    Value = EvalStart(tree, paramlist);
+                    break;
+                case TokenType.Header:
+                    Value = EvalHeader(tree, paramlist);
+                    break;
+                case TokenType.Declaration:
+                    Value = EvalDeclaration(tree, paramlist);
+                    break;
+                case TokenType.InsideDeclaration:
+                    Value = EvalInsideDeclaration(tree, paramlist);
+                    break;
+                case TokenType.Assignment:
+                    Value = EvalAssignment(tree, paramlist);
+                    break;
+                case TokenType.DecAssignment:
+                    Value = EvalDecAssignment(tree, paramlist);
+                    break;
+                case TokenType.Expr:
+                    Value = EvalExpr(tree, paramlist);
+                    break;
+                case TokenType.Char:
+                    Value = EvalChar(tree, paramlist);
+                    break;
+                case TokenType.Atom:
+                    Value = EvalAtom(tree, paramlist);
+                    break;
+                case TokenType.Function:
+                    Value = EvalFunction(tree, paramlist);
+                    break;
+                case TokenType.Parameters:
+                    Value = EvalParameters(tree, paramlist);
+                    break;
+                case TokenType.CodeBlock:
+                    Value = EvalCodeBlock(tree, paramlist);
+                    break;
+                case TokenType.Break:
+                    Value = EvalBreak(tree, paramlist);
+                    break;
+                case TokenType.Switch:
+                    Value = EvalSwitch(tree, paramlist);
+                    break;
+                case TokenType.SwitchCase:
+                    Value = EvalSwitchCase(tree, paramlist);
+                    break;
+                case TokenType.Statement:
+                    Value = EvalStatement(tree, paramlist);
+                    break;
+                case TokenType.If:
+                    Value = EvalIf(tree, paramlist);
+                    break;
+                case TokenType.Condition:
+                    Value = EvalCondition(tree, paramlist);
+                    break;
+                case TokenType.CondLogExpr:
+                    Value = EvalCondLogExpr(tree, paramlist);
+                    break;
+                case TokenType.CondExpr:
+                    Value = EvalCondExpr(tree, paramlist);
+                    break;
+                case TokenType.Else:
+                    Value = EvalElse(tree, paramlist);
+                    break;
+                case TokenType.IfForLoopBlock:
+                    Value = EvalIfForLoopBlock(tree, paramlist);
+                    break;
+                case TokenType.For:
+                    Value = EvalFor(tree, paramlist);
+                    break;
+                case TokenType.ForDeclaration:
+                    Value = EvalForDeclaration(tree, paramlist);
+                    break;
+                case TokenType.ForAssignment:
+                    Value = EvalForAssignment(tree, paramlist);
+                    break;
+                case TokenType.Increment:
+                    Value = EvalIncrement(tree, paramlist);
+                    break;
+                case TokenType.While:
+                    Value = EvalWhile(tree, paramlist);
+                    break;
+                case TokenType.DoWhile:
+                    Value = EvalDoWhile(tree, paramlist);
+                    break;
+                case TokenType.WhileLoopBlock:
+                    Value = EvalWhileLoopBlock(tree, paramlist);
+                    break;
+                case TokenType.Printf:
+                    Value = EvalPrintf(tree, paramlist);
+                    break;
+                case TokenType.Scanf:
+                    Value = EvalScanf(tree, paramlist);
+                    break;
+                case TokenType.Return:
+                    Value = EvalReturn(tree, paramlist);
+                    break;
+
+                default:
+                    Value = Token.Text;
+                    break;
+            }
+            return Value;
+        }
+
+        protected virtual object EvalStart(ParseTree tree, params object[] paramlist)
+        {
+            return "Could not interpret input; no semantics implemented.";
+        }
+
+        protected virtual object EvalHeader(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalDeclaration(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalInsideDeclaration(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalAssignment(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalDecAssignment(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalExpr(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalChar(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalAtom(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalFunction(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalParameters(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalCodeBlock(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalBreak(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalSwitch(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalSwitchCase(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalStatement(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalIf(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalCondition(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalCondLogExpr(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalCondExpr(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalElse(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalIfForLoopBlock(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalFor(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalForDeclaration(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalForAssignment(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalIncrement(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalWhile(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalDoWhile(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalWhileLoopBlock(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalPrintf(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalScanf(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalReturn(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
 
     }
     
