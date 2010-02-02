@@ -15,12 +15,12 @@ namespace parCer32
         public int CurrentLine;
         public int CurrentColumn;
         public int CurrentPosition;
-        public List<Token> Skipped;
+        public List<Token> Skipped; 
         public Dictionary<TokenType, Regex> Patterns;
 
         private Token LookAheadToken;
         private List<TokenType> Tokens;
-        private List<TokenType> SkipList;
+        private List<TokenType> SkipList; 
 
         public Scanner()
         {
@@ -39,13 +39,17 @@ namespace parCer32
             Patterns.Add(TokenType.DIRECTIVE, regex);
             Tokens.Add(TokenType.DIRECTIVE);
 
-            regex = new Regex(@"float|double|u?int|char|u?longlong|u?long|u?short", RegexOptions.Compiled);
+            regex = new Regex(@"float|double|u?int|u?longlong|u?long|u?short|char", RegexOptions.Compiled);
             Patterns.Add(TokenType.DATATYPE, regex);
             Tokens.Add(TokenType.DATATYPE);
 
             regex = new Regex(@"include", RegexOptions.Compiled);
             Patterns.Add(TokenType.INCLUDE, regex);
             Tokens.Add(TokenType.INCLUDE);
+
+            regex = new Regex(@"void", RegexOptions.Compiled);
+            Patterns.Add(TokenType.VOID, regex);
+            Tokens.Add(TokenType.VOID);
 
             regex = new Regex(@"switch", RegexOptions.Compiled);
             Patterns.Add(TokenType.SWITCH, regex);
@@ -107,6 +111,10 @@ namespace parCer32
             Patterns.Add(TokenType.IDENTIFIER, regex);
             Tokens.Add(TokenType.IDENTIFIER);
 
+            regex = new Regex(@"[a-zA-Z_]|[0-9_]", RegexOptions.Compiled);
+            Patterns.Add(TokenType.CHARIDENT, regex);
+            Tokens.Add(TokenType.CHARIDENT);
+
             regex = new Regex(@"\+|-|%|/|\*", RegexOptions.Compiled);
             Patterns.Add(TokenType.ARTOPERATOR, regex);
             Tokens.Add(TokenType.ARTOPERATOR);
@@ -114,6 +122,14 @@ namespace parCer32
             regex = new Regex(@"[0-9]+", RegexOptions.Compiled);
             Patterns.Add(TokenType.NUMBER, regex);
             Tokens.Add(TokenType.NUMBER);
+
+            regex = new Regex(@"\'", RegexOptions.Compiled);
+            Patterns.Add(TokenType.QUOT, regex);
+            Tokens.Add(TokenType.QUOT);
+
+            regex = new Regex(@"\""", RegexOptions.Compiled);
+            Patterns.Add(TokenType.DQUOT, regex);
+            Tokens.Add(TokenType.DQUOT);
 
             regex = new Regex(@",", RegexOptions.Compiled);
             Patterns.Add(TokenType.COMMA, regex);
@@ -216,29 +232,19 @@ namespace parCer32
 
         public Token GetToken(TokenType type)
         {
-            Token t = new Token(this.StartPos, this.EndPos, this.CurrentLine, this.CurrentColumn);
+            Token t = new Token(this.StartPos, this.EndPos);
             t.Type = type;
             return t;
         }
 
-
-
-
-
-
         public Token Scan(params TokenType[] expectedtokens)
         {
-            Token tok = LookAhead(expectedtokens);
-
-            LookAheadToken = null;
+            Token tok = LookAhead(expectedtokens); 
+            LookAheadToken = null; 
             StartPos = tok.EndPos;
             EndPos = tok.EndPos;
             return tok;
         }
-
-
-
-
 
         public Token LookAhead(params TokenType[] expectedtokens)
         {
@@ -247,13 +253,9 @@ namespace parCer32
             Token tok = null;
             List<TokenType> scantokens;
 
-
-
-
-            if (LookAheadToken != null
-                && LookAheadToken.Type != TokenType._UNDETERMINED_
+            if (LookAheadToken != null 
+                && LookAheadToken.Type != TokenType._UNDETERMINED_ 
                 && LookAheadToken.Type != TokenType._NONE_) return LookAheadToken;
-
 
             if (expectedtokens.Length == 0)
                 scantokens = Tokens;
@@ -269,22 +271,17 @@ namespace parCer32
                 int len = -1;
                 TokenType index = (TokenType)int.MaxValue;
                 string input = Input.Substring(startpos);
-                string count = Input.Substring(0, EndPos);
-                CurrentLine = count.Split('\n').Length;
-                int a = count.LastIndexOf(Environment.NewLine);
-                CurrentColumn = EndPos - a;
 
-                tok = new Token(startpos, EndPos, CurrentLine, CurrentColumn);
-
+                tok = new Token(startpos, EndPos);
 
                 for (i = 0; i < scantokens.Count; i++)
                 {
                     Regex r = Patterns[scantokens[i]];
                     Match m = r.Match(input);
-                    if (m.Success && m.Index == 0 && ((m.Length > len) || (scantokens[i] < index && m.Length == len)))
+                    if (m.Success && m.Index == 0 && ((m.Length > len) || (scantokens[i] < index && m.Length == len )))
                     {
                         len = m.Length;
-                        index = scantokens[i];
+                        index = scantokens[i];  
                     }
                 }
 
@@ -293,17 +290,11 @@ namespace parCer32
                     tok.EndPos = startpos + len;
                     tok.Text = Input.Substring(tok.StartPos, len);
                     tok.Type = index;
-                    if (tok.Type != TokenType.WHITESPACE)
-                    {
-                        //Console.WriteLine("Token: {0} \n Type: {1,-12} Line: {2,3} \n", tok.Text, tok.Type, tok.LinePos);
-                    }
                 }
                 else
                 {
                     if (tok.StartPos < tok.EndPos - 1)
-                    {
                         tok.Text = Input.Substring(tok.StartPos, 1);
-                    }
                 }
 
                 if (SkipList.Contains(tok.Type))
@@ -327,151 +318,134 @@ namespace parCer32
     {
 
 
-        _NONE_ = 0,
-        _UNDETERMINED_ = 1,
+            _NONE_  = 0,
+            _UNDETERMINED_= 1,
+
+            Start   = 2,
+            Header  = 3,
+            Declaration= 4,
+            InsideDeclaration= 5,
+            Assignment= 6,
+            DecAssignment= 7,
+            Expr    = 8,
+            Char    = 9,
+            Atom    = 10,
+            Function= 11,
+            Parameters= 12,
+            CodeBlock= 13,
+            Break   = 14,
+            Switch  = 15,
+            SwitchCase= 16,
+            Statement= 17,
+            If      = 18,
+            Condition= 19,
+            CondLogExpr= 20,
+            CondExpr= 21,
+            Else    = 22,
+            IfForLoopBlock= 23,
+            For     = 24,
+            ForDeclaration= 25,
+            ForAssignment= 26,
+            Increment= 27,
+            While   = 28,
+            DoWhile = 29,
+            WhileLoopBlock= 30,
+            Printf  = 31,
+            Scanf   = 32,
+            Return  = 33,
 
 
-        Start = 2,
-        Header = 3,
-        Declaration = 4,
-        InsideDeclaration = 5,
-        Assignment = 6,
-        DecAssignment = 7,
-        Expr = 8,
-        Atom = 9,
-        Function = 10,
-        Parameters = 11,
-        CodeBlock = 12,
-        Break = 13,
-        Switch = 14,
-        SwitchCase = 15,
-        Statement = 16,
-        If = 17,
-        Condition = 18,
-        CondLogExpr = 19,
-        CondExpr = 20,
-        Else = 21,
-        IfForLoopBlock = 22,
-        For = 23,
-        ForDeclaration = 24,
-        ForAssignment = 25,
-        Increment = 26,
-        While = 27,
-        DoWhile = 28,
-        WhileLoopBlock = 29,
-        Printf = 30,
-        Scanf = 31,
-        Return = 32,
-
-
-        DIRECTIVE = 33,
-        DATATYPE = 34,
-        INCLUDE = 35,
-        SWITCH = 36,
-        CASE = 37,
-        IF = 38,
-        ELSE = 39,
-        FOR = 40,
-        WHILE = 41,
-        DEFAULT = 42,
-        RETURN = 43,
-        SCANF = 44,
-        PRINTF = 45,
-        DO = 46,
-        BREAK = 47,
-        TYPESPEC = 48,
-        REFOPER = 49,
-        IDENTIFIER = 50,
-        ARTOPERATOR = 51,
-        NUMBER = 52,
-        COMMA = 53,
-        EQUALS = 54,
-        SEMICOL = 55,
-        COLON = 56,
-        SHARP = 57,
-        EOF = 58,
-        LPAREN = 59,
-        RPAREN = 60,
-        LBRACE = 61,
-        RBRACE = 62,
-        RELOP = 63,
-        LOGOP = 64,
-        INCRE = 65,
-        BOOL = 66,
-        NOT = 67,
-        NULL = 68,
-        STRING = 69,
-        WHITESPACE = 70,
-        EOL = 71,
-        COMMENTLINE = 72,
-        COMMENTBLOCK = 73
+            DIRECTIVE= 34,
+            DATATYPE= 35,
+            INCLUDE = 36,
+            VOID    = 37,
+            SWITCH  = 38,
+            CASE    = 39,
+            IF      = 40,
+            ELSE    = 41,
+            FOR     = 42,
+            WHILE   = 43,
+            DEFAULT = 44,
+            RETURN  = 45,
+            SCANF   = 46,
+            PRINTF  = 47,
+            DO      = 48,
+            BREAK   = 49,
+            TYPESPEC= 50,
+            REFOPER = 51,
+            IDENTIFIER= 52,
+            CHARIDENT= 53,
+            ARTOPERATOR= 54,
+            NUMBER  = 55,
+            QUOT    = 56,
+            DQUOT   = 57,
+            COMMA   = 58,
+            EQUALS  = 59,
+            SEMICOL = 60,
+            COLON   = 61,
+            SHARP   = 62,
+            EOF     = 63,
+            LPAREN  = 64,
+            RPAREN  = 65,
+            LBRACE  = 66,
+            RBRACE  = 67,
+            RELOP   = 68,
+            LOGOP   = 69,
+            INCRE   = 70,
+            BOOL    = 71,
+            NOT     = 72,
+            NULL    = 73,
+            STRING  = 74,
+            WHITESPACE= 75,
+            EOL     = 76,
+            COMMENTLINE= 77,
+            COMMENTBLOCK= 78
     }
 
     public class Token
     {
         private int startpos;
         private int endpos;
-        private int linepos;
-        private int columnpos;
         private string text;
         private object value;
 
-        public int LinePos
-        {
-            get { return linepos; }
-            set { linepos = value; }
-        }
-
-        public int ColumnPos
-        {
-            get { return columnpos; }
-            set { columnpos = value; }
-        }
-
-        public int StartPos
-        {
-            get { return startpos; }
+        public int StartPos { 
+            get { return startpos;} 
             set { startpos = value; }
         }
 
-        public int Length
-        {
-            get { return endpos - startpos; }
+        public int Length { 
+            get { return endpos - startpos;} 
         }
 
-        public int EndPos
-        {
-            get { return endpos; }
+        public int EndPos { 
+            get { return endpos;} 
             set { endpos = value; }
         }
 
-        public string Text
-        {
-            get { return text; }
+        public string Text { 
+            get { return text;} 
             set { text = value; }
         }
 
-        public object Value
-        {
-            get { return value; }
+        public object Value { 
+            get { return value;} 
             set { this.value = value; }
         }
 
         public TokenType Type;
 
         public Token()
-            : this(0, 0, 0, 0)
+            : this(0, 0)
         {
         }
 
-        public Token(int start, int end, int line, int column)
+        public Token(int start, int end)
         {
             Type = TokenType._UNDETERMINED_;
             startpos = start;
-            linepos = line;
-            columnpos = column;
             endpos = end;
-            Text = "";
+            Text = ""; 
             Value = null;
         }
 

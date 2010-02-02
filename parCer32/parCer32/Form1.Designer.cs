@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            AIMS.Libraries.CodeEditor.WinForms.LineMarginRender lineMarginRender2 = new AIMS.Libraries.CodeEditor.WinForms.LineMarginRender();
+            AIMS.Libraries.CodeEditor.WinForms.LineMarginRender lineMarginRender1 = new AIMS.Libraries.CodeEditor.WinForms.LineMarginRender();
             this.syntaxDocument1 = new AIMS.Libraries.CodeEditor.Syntax.SyntaxDocument(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -125,8 +125,8 @@
             this.codeEditorControl1.InfoTipPosition = null;
             this.codeEditorControl1.InfoTipSelectedIndex = 1;
             this.codeEditorControl1.InfoTipVisible = false;
-            lineMarginRender2.Bounds = new System.Drawing.Rectangle(19, 0, 19, 16);
-            this.codeEditorControl1.LineMarginRender = lineMarginRender2;
+            lineMarginRender1.Bounds = new System.Drawing.Rectangle(19, 0, 19, 16);
+            this.codeEditorControl1.LineMarginRender = lineMarginRender1;
             this.codeEditorControl1.Location = new System.Drawing.Point(0, 0);
             this.codeEditorControl1.LockCursorUpdate = false;
             this.codeEditorControl1.Name = "codeEditorControl1";
@@ -154,7 +154,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Tag = "cc";
-            this.Text = "parCer : A Lexer/Parser for C (Aivan Monceller && Patrick Cardenas)";
+            this.Text = "parCer : A Lexer/Parser for C ";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
