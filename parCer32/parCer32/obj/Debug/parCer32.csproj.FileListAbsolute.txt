@@ -11,3 +11,5 @@ C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects
 C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.csproj.GenerateResource.Cache
 C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.exe
 C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer32\parCer32\obj\Debug\parCer32.pdb
