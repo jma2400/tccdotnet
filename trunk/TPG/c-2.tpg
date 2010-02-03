@@ -2,6 +2,7 @@
 DIRECTIVE	-> @"<.+?>";
 DATATYPE	-> @"float|double|u?int|char|u?longlong|u?long|u?short";
 INCLUDE	-> @"include";
+VOID		-> @"void";
 SWITCH		-> @"switch";
 CASE		-> @"case";
 IF 		-> @"if";
@@ -17,8 +18,11 @@ BREAK         -> @"break";
 TYPESPEC	-> @"@?\""%[dfsc]\""";
 REFOPER	-> @"&";
 IDENTIFIER   	-> @"[a-zA-Z_][a-zA-Z0-9_]*";
+CHARIDENT	-> @"[a-zA-Z_]|[0-9_]";
 ARTOPERATOR	-> @"\+|-|%|/|\*";
 NUMBER		-> @"[0-9]+";
+QUOT		-> @"\'";
+DQUOT		-> @"\""";
 COMMA		-> @",";
 EQUALS		-> @"=";
 SEMICOL	-> @";";
@@ -48,19 +52,24 @@ COMMENTLINE  	-> @"//[^\n]*\n?";
 COMMENTBLOCK 	-> @"/\*[^*]*\*+(?:[^/*][^*]*\*+)*/";
 
 
-Start 		 -> Header+ (Declaration|Assignment)* EOF;
+Start 		 -> Header+ Declaration* EOF;
 Header 	 -> SHARP INCLUDE DIRECTIVE;
-Declaration 	 -> DATATYPE IDENTIFIER (Function?|DecAssignment?(COMMA IDENTIFIER DecAssignment?)* SEMICOL);
+Declaration 	 -> Vreturn (Function?|DecAssignment?(COMMA IDENTIFIER DecAssignment?)* SEMICOL);
+Vreturn	 -> (DATATYPE|VOID)? IDENTIFIER;		
+
 //Function? is exluded from InsideDeclaration
 InsideDeclaration -> DATATYPE IDENTIFIER DecAssignment?(COMMA IDENTIFIER DecAssignment?)* SEMICOL;
 Assignment	 -> IDENTIFIER EQUALS Expr SEMICOL;
-DecAssignment	 -> EQUALS Expr;
+DecAssignment	 -> EQUALS (Expr|Char);
 Expr 		 -> Atom (ARTOPERATOR Atom)*;
+Char		 -> QUOT CHARIDENT QUOT;
 Atom 		 -> NUMBER | IDENTIFIER | LPAREN Expr RPAREN;
-Function 	 -> LPAREN Parameters RPAREN CodeBlock;
+
+Function 	 -> LPAREN (Parameters|VOID) RPAREN CodeBlock;
 Parameters 	 -> ((DATATYPE IDENTIFIER)(COMMA DATATYPE IDENTIFIER)*)?;
 CodeBlock	 -> BOOL|(LBRACE Statement* RBRACE);
 Break		 -> BREAK SEMICOL;
+
 Switch		 -> SWITCH LPAREN IDENTIFIER RPAREN LBRACE SwitchCase RBRACE;
 SwitchCase	 -> ((CASE NUMBER COLON)* (DEFAULT COLON)? Statement?)* Statement*;
 Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|InsideDeclaration|Assignment|Break;
