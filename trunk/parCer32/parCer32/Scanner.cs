@@ -9,18 +9,18 @@ namespace parCer32
     public partial class Scanner
     {
         public string Input;
-        public int LastPos = 0;
         public int StartPos = 0;
+        public int LastPos = 0;
         public int EndPos = 0;
         public int CurrentLine;
         public int CurrentColumn;
         public int CurrentPosition;
-        public List<Token> Skipped; // tokens that were skipped
+        public List<Token> Skipped; 
         public Dictionary<TokenType, Regex> Patterns;
 
         private Token LookAheadToken;
         private List<TokenType> Tokens;
-        private List<TokenType> SkipList; // tokens to be skipped
+        private List<TokenType> SkipList; 
 
         public Scanner()
         {
@@ -111,13 +111,21 @@ namespace parCer32
             Patterns.Add(TokenType.IDENTIFIER, regex);
             Tokens.Add(TokenType.IDENTIFIER);
 
-            regex = new Regex(@"[a-zA-Z_]|[0-9_]", RegexOptions.Compiled);
+            regex = new Regex(@"([a-zA-z_]|[0-9_])", RegexOptions.Compiled);
             Patterns.Add(TokenType.CHARIDENT, regex);
             Tokens.Add(TokenType.CHARIDENT);
+
+            regex = new Regex(@"([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_])", RegexOptions.Compiled);
+            Patterns.Add(TokenType.CHARIDENT2, regex);
+            Tokens.Add(TokenType.CHARIDENT2);
 
             regex = new Regex(@"\+|-|%|/|\*", RegexOptions.Compiled);
             Patterns.Add(TokenType.ARTOPERATOR, regex);
             Tokens.Add(TokenType.ARTOPERATOR);
+
+            regex = new Regex(@"[a-zA-Z_]*", RegexOptions.Compiled);
+            Patterns.Add(TokenType.CASECHAR, regex);
+            Tokens.Add(TokenType.CASECHAR);
 
             regex = new Regex(@"[0-9]+", RegexOptions.Compiled);
             Patterns.Add(TokenType.NUMBER, regex);
@@ -130,6 +138,10 @@ namespace parCer32
             regex = new Regex(@"\""", RegexOptions.Compiled);
             Patterns.Add(TokenType.DQUOT, regex);
             Tokens.Add(TokenType.DQUOT);
+
+            regex = new Regex(@"\*", RegexOptions.Compiled);
+            Patterns.Add(TokenType.POINTER, regex);
+            Tokens.Add(TokenType.POINTER);
 
             regex = new Regex(@",", RegexOptions.Compiled);
             Patterns.Add(TokenType.COMMA, regex);
@@ -170,6 +182,14 @@ namespace parCer32
             regex = new Regex(@"\}", RegexOptions.Compiled);
             Patterns.Add(TokenType.RBRACE, regex);
             Tokens.Add(TokenType.RBRACE);
+
+            regex = new Regex(@"\[", RegexOptions.Compiled);
+            Patterns.Add(TokenType.LARRAY, regex);
+            Tokens.Add(TokenType.LARRAY);
+
+            regex = new Regex(@"\]", RegexOptions.Compiled);
+            Patterns.Add(TokenType.RARRAY, regex);
+            Tokens.Add(TokenType.RARRAY);
 
             regex = new Regex(@">=|<=|==|!=|>|<", RegexOptions.Compiled);
             Patterns.Add(TokenType.RELOP, regex);
@@ -237,24 +257,15 @@ namespace parCer32
             return t;
         }
 
-         /// <summary>
-        /// executes a lookahead of the next token
-        /// and will advance the scan on the input string
-        /// </summary>
-        /// <returns></returns>
         public Token Scan(params TokenType[] expectedtokens)
         {
-            Token tok = LookAhead(expectedtokens); // temporarely retrieve the lookahead
-            LookAheadToken = null; // reset lookahead token, so scanning will continue
+            Token tok = LookAhead(expectedtokens); 
+            LookAheadToken = null; 
             StartPos = tok.EndPos;
-            EndPos = tok.EndPos; // set the tokenizer to the new scan position
+            EndPos = tok.EndPos; 
             return tok;
         }
 
-        /// <summary>
-        /// returns token with longest best match
-        /// </summary>
-        /// <returns></returns>
         public Token LookAhead(params TokenType[] expectedtokens)
         {
             int i;
@@ -262,14 +273,10 @@ namespace parCer32
             Token tok = null;
             List<TokenType> scantokens;
 
-
-            // this prevents double scanning and matching
-            // increased performance
             if (LookAheadToken != null 
                 && LookAheadToken.Type != TokenType._UNDETERMINED_ 
                 && LookAheadToken.Type != TokenType._NONE_) return LookAheadToken;
 
-            // if no scantokens specified, then scan for all of them (= backward compatible)
             if (expectedtokens.Length == 0)
                 scantokens = Tokens;
             else
@@ -291,7 +298,6 @@ namespace parCer32
 
                 tok = new Token(startpos, EndPos, CurrentLine, CurrentColumn);
 
-
                 for (i = 0; i < scantokens.Count; i++)
                 {
                     Regex r = Patterns[scantokens[i]];
@@ -310,15 +316,13 @@ namespace parCer32
                     tok.Type = index;
                     if (tok.Type != TokenType.WHITESPACE)
                     {
-                        //Console.WriteLine("Token: {0} \n Type: {1,-12} Line: {2,3} \n", tok.Text, tok.Type, tok.LinePos);
+                       
                     }
                 }
                 else
                 {
                     if (tok.StartPos < tok.EndPos - 1)
-                    {
                         tok.Text = Input.Substring(tok.StartPos, 1);
-                    }
                 }
 
                 if (SkipList.Contains(tok.Type))
@@ -350,91 +354,102 @@ namespace parCer32
             Header  = 3,
             Declaration= 4,
             Vreturn = 5,
-            InsideDeclaration= 6,
-            Assignment= 7,
-            DecAssignment= 8,
-            Expr    = 9,
-            Char    = 10,
-            Atom    = 11,
-            Function= 12,
-            Parameters= 13,
-            CodeBlock= 14,
-            Break   = 15,
-            Switch  = 16,
-            SwitchCase= 17,
-            Statement= 18,
-            If      = 19,
-            Condition= 20,
-            CondLogExpr= 21,
-            CondExpr= 22,
-            Else    = 23,
-            IfForLoopBlock= 24,
-            For     = 25,
-            ForDeclaration= 26,
-            ForAssignment= 27,
-            Increment= 28,
-            While   = 29,
-            DoWhile = 30,
-            WhileLoopBlock= 31,
-            Printf  = 32,
-            Scanf   = 33,
-            Return  = 34,
+            Array   = 6,
+            ArAssignment= 7,
+            ArContent= 8,
+            VarArray= 9,
+            InsideDeclaration= 10,
+            Assignment= 11,
+            DecAssignment= 12,
+            Expr    = 13,
+            Char    = 14,
+            Atom    = 15,
+            Function= 16,
+            Parameters= 17,
+            ParArray= 18,
+            CodeBlock= 19,
+            Break   = 20,
+            Switch  = 21,
+            SwitchCase= 22,
+            CaseComp= 23,
+            Statement= 24,
+            If      = 25,
+            Condition= 26,
+            CondLogExpr= 27,
+            CondExpr= 28,
+            Else    = 29,
+            IfForLoopBlock= 30,
+            For     = 31,
+            ForDeclaration= 32,
+            ForAssignment= 33,
+            Increment= 34,
+            While   = 35,
+            DoWhile = 36,
+            WhileLoopBlock= 37,
+            Printf  = 38,
+            Scanf   = 39,
+            Return  = 40,
 
             //Terminal tokens:
-            DIRECTIVE= 35,
-            DATATYPE= 36,
-            INCLUDE = 37,
-            VOID    = 38,
-            SWITCH  = 39,
-            CASE    = 40,
-            IF      = 41,
-            ELSE    = 42,
-            FOR     = 43,
-            WHILE   = 44,
-            DEFAULT = 45,
-            RETURN  = 46,
-            SCANF   = 47,
-            PRINTF  = 48,
-            DO      = 49,
-            BREAK   = 50,
-            TYPESPEC= 51,
-            REFOPER = 52,
-            IDENTIFIER= 53,
-            CHARIDENT= 54,
-            ARTOPERATOR= 55,
-            NUMBER  = 56,
-            QUOT    = 57,
-            DQUOT   = 58,
-            COMMA   = 59,
-            EQUALS  = 60,
-            SEMICOL = 61,
-            COLON   = 62,
-            SHARP   = 63,
-            EOF     = 64,
-            LPAREN  = 65,
-            RPAREN  = 66,
-            LBRACE  = 67,
-            RBRACE  = 68,
-            RELOP   = 69,
-            LOGOP   = 70,
-            INCRE   = 71,
-            BOOL    = 72,
-            NOT     = 73,
-            NULL    = 74,
-            STRING  = 75,
-            WHITESPACE= 76,
-            EOL     = 77,
-            COMMENTLINE= 78,
-            COMMENTBLOCK= 79
+            DIRECTIVE= 41,
+            DATATYPE= 42,
+            INCLUDE = 43,
+            VOID    = 44,
+            SWITCH  = 45,
+            CASE    = 46,
+            IF      = 47,
+            ELSE    = 48,
+            FOR     = 49,
+            WHILE   = 50,
+            DEFAULT = 51,
+            RETURN  = 52,
+            SCANF   = 53,
+            PRINTF  = 54,
+            DO      = 55,
+            BREAK   = 56,
+            TYPESPEC= 57,
+            REFOPER = 58,
+            IDENTIFIER= 59,
+            CHARIDENT= 60,
+            CHARIDENT2= 61,
+            ARTOPERATOR= 62,
+            CASECHAR= 63,
+            NUMBER  = 64,
+            QUOT    = 65,
+            DQUOT   = 66,
+            POINTER = 67,
+            COMMA   = 68,
+            EQUALS  = 69,
+            SEMICOL = 70,
+            COLON   = 71,
+            SHARP   = 72,
+            EOF     = 73,
+            LPAREN  = 74,
+            RPAREN  = 75,
+            LBRACE  = 76,
+            RBRACE  = 77,
+            LARRAY  = 78,
+            RARRAY  = 79,
+            RELOP   = 80,
+            LOGOP   = 81,
+            INCRE   = 82,
+            BOOL    = 83,
+            NOT     = 84,
+            NULL    = 85,
+            STRING  = 86,
+            WHITESPACE= 87,
+            EOL     = 88,
+            COMMENTLINE= 89,
+            COMMENTBLOCK= 90
     }
 
     public class Token
     {
         private int startpos;
         private int endpos;
+        private string text;
         private int linepos;
         private int columnpos;
-        private string text;
         private object value;
 
         public int LinePos
@@ -449,31 +464,26 @@ namespace parCer32
             set { columnpos = value; }
         }
 
-        public int StartPos 
-        { 
-            get { return startpos; } 
+        public int StartPos { 
+            get { return startpos;} 
             set { startpos = value; }
         }
 
-        public int Length 
-        { 
+        public int Length { 
             get { return endpos - startpos;} 
         }
 
-        public int EndPos 
-        { 
+        public int EndPos { 
             get { return endpos;} 
             set { endpos = value; }
         }
 
-        public string Text 
-        { 
+        public string Text { 
             get { return text;} 
             set { text = value; }
         }
 
-        public object Value 
-        { 
+        public object Value { 
             get { return value;} 
             set { this.value = value; }
         }
@@ -492,7 +502,7 @@ namespace parCer32
             linepos = line;
             columnpos = column;
             endpos = end;
-            Text = ""; // must initialize with empty string, may cause null reference exceptions otherwise
+            Text = ""; 
             Value = null;
         }
 

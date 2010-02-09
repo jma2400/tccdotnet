@@ -166,6 +166,18 @@ namespace parCer32
                 case TokenType.Vreturn:
                     Value = EvalVreturn(tree, paramlist);
                     break;
+                case TokenType.Array:
+                    Value = EvalArray(tree, paramlist);
+                    break;
+                case TokenType.ArAssignment:
+                    Value = EvalArAssignment(tree, paramlist);
+                    break;
+                case TokenType.ArContent:
+                    Value = EvalArContent(tree, paramlist);
+                    break;
+                case TokenType.VarArray:
+                    Value = EvalVarArray(tree, paramlist);
+                    break;
                 case TokenType.InsideDeclaration:
                     Value = EvalInsideDeclaration(tree, paramlist);
                     break;
@@ -190,6 +202,9 @@ namespace parCer32
                 case TokenType.Parameters:
                     Value = EvalParameters(tree, paramlist);
                     break;
+                case TokenType.ParArray:
+                    Value = EvalParArray(tree, paramlist);
+                    break;
                 case TokenType.CodeBlock:
                     Value = EvalCodeBlock(tree, paramlist);
                     break;
@@ -201,6 +216,9 @@ namespace parCer32
                     break;
                 case TokenType.SwitchCase:
                     Value = EvalSwitchCase(tree, paramlist);
+                    break;
+                case TokenType.CaseComp:
+                    Value = EvalCaseComp(tree, paramlist);
                     break;
                 case TokenType.Statement:
                     Value = EvalStatement(tree, paramlist);
@@ -281,6 +299,26 @@ namespace parCer32
             throw new NotImplementedException();
         }
 
+        protected virtual object EvalArray(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalArAssignment(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalArContent(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalVarArray(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
         protected virtual object EvalInsideDeclaration(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
@@ -321,6 +359,11 @@ namespace parCer32
             throw new NotImplementedException();
         }
 
+        protected virtual object EvalParArray(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
         protected virtual object EvalCodeBlock(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
@@ -337,6 +380,11 @@ namespace parCer32
         }
 
         protected virtual object EvalSwitchCase(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalCaseComp(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }

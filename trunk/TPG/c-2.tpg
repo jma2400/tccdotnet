@@ -18,11 +18,14 @@ BREAK         -> @"break";
 TYPESPEC	-> @"@?\""%[dfsc]\""";
 REFOPER	-> @"&";
 IDENTIFIER   	-> @"[a-zA-Z_][a-zA-Z0-9_]*";
-CHARIDENT	-> @"[a-zA-Z_]|[0-9_]";
+CHARIDENT	-> @"([a-zA-z_]|[0-9_])";
+CHARIDENT2	-> @"([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_])";
 ARTOPERATOR	-> @"\+|-|%|/|\*";
+CASECHAR	-> @"[a-zA-Z_]*";
 NUMBER		-> @"[0-9]+";
 QUOT		-> @"\'";
 DQUOT		-> @"\""";
+POINTER	-> @"\*";
 COMMA		-> @",";
 EQUALS		-> @"=";
 SEMICOL	-> @";";
@@ -33,6 +36,8 @@ LPAREN		-> @"\(";
 RPAREN		-> @"\)";
 LBRACE		-> @"\{";
 RBRACE		-> @"\}";
+LARRAY		-> @"\[";
+RARRAY		-> @"\]";
 RELOP	       -> @">=|<=|==|!=|>|<";
 LOGOP		-> @"&&|\|\|";
 INCRE		-> @"\+\+|--";
@@ -54,24 +59,34 @@ COMMENTBLOCK 	-> @"/\*[^*]*\*+(?:[^/*][^*]*\*+)*/";
 
 Start 		 -> Header+ Declaration* EOF;
 Header 	 -> SHARP INCLUDE DIRECTIVE;
-Declaration 	 -> Vreturn (Function?|DecAssignment?(COMMA IDENTIFIER DecAssignment?)* SEMICOL);
-Vreturn	 -> (DATATYPE|VOID)? IDENTIFIER;		
+Declaration 	 -> Vreturn (Function?|DecAssignment?(COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL);
+Vreturn	 -> (DATATYPE POINTER? IDENTIFIER Array? |VOID POINTER? IDENTIFIER)?;
+
+//Array Declaration
+Array		 -> (LARRAY NUMBER RARRAY)+ ArAssignment?;	
+ArAssignment	 -> EQUALS ArContent;
+ArContent	 -> LBRACE STRING (COMMA STRING)* RBRACE;
+
+//Calling Variable Array
+VarArray	 ->(LARRAY (NUMBER|IDENTIFIER) RARRAY)*;
 
 //Function? is exluded from InsideDeclaration
-InsideDeclaration -> DATATYPE IDENTIFIER DecAssignment?(COMMA IDENTIFIER DecAssignment?)* SEMICOL;
+InsideDeclaration -> DATATYPE POINTER? IDENTIFIER Array? DecAssignment?(COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL;
 Assignment	 -> IDENTIFIER EQUALS Expr SEMICOL;
 DecAssignment	 -> EQUALS (Expr|Char);
 Expr 		 -> Atom (ARTOPERATOR Atom)*;
-Char		 -> QUOT CHARIDENT QUOT;
-Atom 		 -> NUMBER | IDENTIFIER | LPAREN Expr RPAREN;
+Char		 -> QUOT (CHARIDENT|CHARIDENT2) QUOT;
+Atom 		 -> NUMBER | (POINTER? IDENTIFIER VarArray?) | LPAREN Expr RPAREN;
 
 Function 	 -> LPAREN (Parameters|VOID) RPAREN CodeBlock;
-Parameters 	 -> ((DATATYPE IDENTIFIER)(COMMA DATATYPE IDENTIFIER)*)?;
+Parameters 	 -> ((DATATYPE POINTER? IDENTIFIER ParArray?)(COMMA DATATYPE POINTER? IDENTIFIER ParArray?)*)?;
+ParArray	 -> (LARRAY NUMBER RARRAY)*;
 CodeBlock	 -> BOOL|(LBRACE Statement* RBRACE);
 Break		 -> BREAK SEMICOL;
 
-Switch		 -> SWITCH LPAREN IDENTIFIER RPAREN LBRACE SwitchCase RBRACE;
-SwitchCase	 -> ((CASE NUMBER COLON)* (DEFAULT COLON)? Statement?)* Statement*;
+Switch		 -> SWITCH LPAREN IDENTIFIER VarArray? RPAREN LBRACE SwitchCase RBRACE;
+SwitchCase	 -> ((CASE CaseComp COLON)* (DEFAULT COLON)? Statement?)* Statement*;
+CaseComp	 -> NUMBER|Char;
 Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|InsideDeclaration|Assignment|Break;
 
 If		 -> IF LPAREN (Condition) RPAREN IfForLoopBlock Else?;
@@ -79,7 +94,7 @@ If		 -> IF LPAREN (Condition) RPAREN IfForLoopBlock Else?;
 
 Condition 	-> BOOL | (CondLogExpr (LOGOP CondLogExpr)*);
 CondLogExpr 	-> CondExpr (RELOP CondExpr)*;
-CondExpr	-> (IDENTIFIER|NUMBER) | NOT? LPAREN Condition RPAREN;
+CondExpr	-> (IDENTIFIER VarArray?|NUMBER|STRING) | NOT? LPAREN Condition RPAREN;
 
 //Condition	 -> BOOL|(IDENTIFIER RELOP (IDENTIFIER|NUMBER)) (LOGOP Condition)?;
 Else	 	 -> ELSE IfForLoopBlock;
@@ -99,7 +114,7 @@ DoWhile	 -> DO WhileLoopBlock WHILE LPAREN Condition RPAREN SEMICOL;
 //WhileLoopBlock enforces the use of { and } as compared to IfForLoopBlock
 WhileLoopBlock -> LBRACE Statement* RBRACE;
 
-Printf 	 -> PRINTF LPAREN STRING (COMMA (IDENTIFIER|NUMBER))* RPAREN SEMICOL;
+Printf 	 -> PRINTF LPAREN STRING (COMMA (IDENTIFIER VarArray?|NUMBER))* RPAREN SEMICOL;
 
 Scanf		 -> SCANF LPAREN TYPESPEC COMMA REFOPER IDENTIFIER RPAREN SEMICOL;
 
