@@ -1,7 +1,8 @@
 #include<stdio.h>
-int x[20],t=2,c,f,g,e=2;int y;
+int x[20]={"X"},t=2,c,f,g,e=2;int y;
 float *we=2;
 char str[100]={"peter", "aivan", "pj"};
+
 
 int main(int *x,double b)
 {	
@@ -104,14 +105,20 @@ int main(int *x,double b)
 	printf("hello %d, %d",x[x], d[12]);
 	scanf("%d",&x);
 
-return v;
-return 2;
-return x+2;
-return g+k;	
-return (j+k);
-return (2-s*f-(g+p));
-return f*(g);
+	return v;
+	return 2;
+	return x+2;
+	return g+k;	
+	return (j+k);
+	return (2-s*f-(g+p));
+	return f*(g);
 }
 
-
-
+long hotdog(int x)
+{
+	printf("hi");
+	int *a,b,c;
+	a = &b;
+	b = 10;
+	c = *a;
+}

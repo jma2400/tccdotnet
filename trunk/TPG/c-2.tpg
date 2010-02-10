@@ -18,7 +18,7 @@ BREAK         -> @"break";
 TYPESPEC	-> @"@?\""%[dfsc]\""";
 REFOPER	-> @"&";
 IDENTIFIER   	-> @"[a-zA-Z_][a-zA-Z0-9_]*";
-CHARIDENT	-> @"([a-zA-z_]|[0-9_])";
+CHARIDENT	-> @"([a-zA-Z_]|[0-9_])";
 CHARIDENT2	-> @"([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_])";
 ARTOPERATOR	-> @"\+|-|%|/|\*";
 CASECHAR	-> @"[a-zA-Z_]*";
@@ -45,6 +45,7 @@ BOOL		-> @"true|false";
 NOT		-> @"!";
 NULL		-> @"";
 STRING        -> @"@?\""(\""\""|[^\""])*\""";
+VARIABLEPARAMS -> @"\.\.\.";
 
 
 [Skip]
@@ -56,11 +57,24 @@ COMMENTLINE  	-> @"//[^\n]*\n?";
 [Skip]
 COMMENTBLOCK 	-> @"/\*[^*]*\*+(?:[^/*][^*]*\*+)*/";
 
+/* === C-language CFG === */
 
-Start 		 -> Header+ Declaration* EOF;
+Start 		 -> Header+ GlobalDecl* EOF;
+
+/* Pre-processor directives */
 Header 	 -> SHARP INCLUDE DIRECTIVE;
-Declaration 	 -> Vreturn (Function?|DecAssignment?(COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL);
-Vreturn	 -> (DATATYPE POINTER? IDENTIFIER Array? |VOID POINTER? IDENTIFIER)?;
+
+/*
+ * Global declaration includes all declarations made outside functions.
+ * -- Types: Variable, function, and function prototype declaration
+ */
+
+GlobalDecl 	 -> (DATATYPE|VOID) POINTER? IDENTIFIER (Function? 
+				| (Array|DecAssignment)? (COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL);
+
+
+/*GlobalDecl 	 -> (DATATYPE|VOID) POINTER? IDENTIFIER (Function? 
+				| (Array|DecAssignment)? (COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL);*/
 
 //Array Declaration
 Array		 -> (LARRAY NUMBER RARRAY)+ ArAssignment?;	
@@ -70,16 +84,16 @@ ArContent	 -> LBRACE STRING (COMMA STRING)* RBRACE;
 //Calling Variable Array
 VarArray	 ->(LARRAY (NUMBER|IDENTIFIER) RARRAY)*;
 
-//Function? is exluded from InsideDeclaration
-InsideDeclaration -> DATATYPE POINTER? IDENTIFIER Array? DecAssignment?(COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL;
+//Function? is exluded from LocalDecl
+LocalDecl -> DATATYPE POINTER? IDENTIFIER Array? DecAssignment?(COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL;
 Assignment	 -> IDENTIFIER EQUALS Expr SEMICOL;
 DecAssignment	 -> EQUALS (Expr|Char);
 Expr 		 -> Atom (ARTOPERATOR Atom)*;
 Char		 -> QUOT (CHARIDENT|CHARIDENT2) QUOT;
-Atom 		 -> NUMBER | (POINTER? IDENTIFIER VarArray?) | LPAREN Expr RPAREN;
+Atom 		 -> NUMBER | ((POINTER|REFOPER)? IDENTIFIER VarArray?) | LPAREN Expr RPAREN;
 
-Function 	 -> LPAREN (Parameters|VOID) RPAREN CodeBlock;
-Parameters 	 -> ((DATATYPE POINTER? IDENTIFIER ParArray?)(COMMA DATATYPE POINTER? IDENTIFIER ParArray?)*)?;
+Function 	 -> LPAREN (Parameters|VOID) RPAREN (SEMICOL|CodeBlock);
+Parameters 	 -> ((DATATYPE POINTER? IDENTIFIER ParArray?)(COMMA ((DATATYPE POINTER? IDENTIFIER ParArray?)|VARIABLEPARAMS))*)?;
 ParArray	 -> (LARRAY NUMBER RARRAY)*;
 CodeBlock	 -> BOOL|(LBRACE Statement* RBRACE);
 Break		 -> BREAK SEMICOL;
@@ -87,7 +101,7 @@ Break		 -> BREAK SEMICOL;
 Switch		 -> SWITCH LPAREN IDENTIFIER VarArray? RPAREN LBRACE SwitchCase RBRACE;
 SwitchCase	 -> ((CASE CaseComp COLON)* (DEFAULT COLON)? Statement?)* Statement*;
 CaseComp	 -> NUMBER|Char;
-Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|InsideDeclaration|Assignment|Break;
+Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|LocalDecl|Assignment|Break;
 
 If		 -> IF LPAREN (Condition) RPAREN IfForLoopBlock Else?;
 //Condition	 -> BOOL|(IDENTIFIER RELOP (IDENTIFIER|NUMBER)) (LOGOP Condition)?;
