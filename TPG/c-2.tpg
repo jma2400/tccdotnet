@@ -1,4 +1,4 @@
-<% @TinyPG Namespace="parCer" Language="csharp" %>
+<% @TinyPG Namespace="tccdotnet" Language="csharp" %>
 DIRECTIVE	-> @"<.+?>";
 DATATYPE	-> @"float|double|u?int|char|u?longlong|u?long|u?short";
 INCLUDE	-> @"include";
