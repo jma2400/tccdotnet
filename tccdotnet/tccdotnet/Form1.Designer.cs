@@ -35,22 +35,24 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusError = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelOutput = new System.Windows.Forms.Panel();
-            this.splitterRight = new System.Windows.Forms.Splitter();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.codeEditorControl1 = new AIMS.Libraries.CodeEditor.CodeEditorControl();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.tabOutput = new tccdotnet.Controls.TabControlEx();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.headerMessage = new tccdotnet.Controls.HeaderLabel();
+            this.splitterRight = new System.Windows.Forms.Splitter();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.codeEditorControl1 = new AIMS.Libraries.CodeEditor.CodeEditorControl();
+            this.tvParseTree = new System.Windows.Forms.TreeView();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.panelOutput.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.tabOutput.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // syntaxDocument
@@ -93,6 +95,16 @@
             this.toolStripButton2.Text = "Open";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "Show Messages";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -118,6 +130,52 @@
             this.panelOutput.Name = "panelOutput";
             this.panelOutput.Size = new System.Drawing.Size(200, 393);
             this.panelOutput.TabIndex = 5;
+            // 
+            // tabOutput
+            // 
+            this.tabOutput.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabOutput.Controls.Add(this.tabPage1);
+            this.tabOutput.Controls.Add(this.tabPage2);
+            this.tabOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabOutput.Location = new System.Drawing.Point(0, 21);
+            this.tabOutput.Name = "tabOutput";
+            this.tabOutput.SelectedIndex = 0;
+            this.tabOutput.Size = new System.Drawing.Size(200, 372);
+            this.tabOutput.TabIndex = 2;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.tvParseTree);
+            this.tabPage1.Location = new System.Drawing.Point(4, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(192, 346);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Parse Tree";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(192, 346);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Output";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // headerMessage
+            // 
+            this.headerMessage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerMessage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headerMessage.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.headerMessage.Location = new System.Drawing.Point(0, 0);
+            this.headerMessage.Name = "headerMessage";
+            this.headerMessage.Size = new System.Drawing.Size(200, 21);
+            this.headerMessage.TabIndex = 1;
+            this.headerMessage.Text = "Messages";
+            this.headerMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.headerMessage.UseCompatibleTextRendering = true;
             // 
             // splitterRight
             // 
@@ -171,60 +229,13 @@
             this.codeEditorControl1.Text = "codeEditor";
             this.codeEditorControl1.WhitespaceColor = System.Drawing.SystemColors.ControlDark;
             // 
-            // toolStripButton3
+            // tvParseTree
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "Show Messages";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
-            // tabOutput
-            // 
-            this.tabOutput.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.tabOutput.Controls.Add(this.tabPage1);
-            this.tabOutput.Controls.Add(this.tabPage2);
-            this.tabOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabOutput.Location = new System.Drawing.Point(0, 21);
-            this.tabOutput.Name = "tabOutput";
-            this.tabOutput.SelectedIndex = 0;
-            this.tabOutput.Size = new System.Drawing.Size(200, 372);
-            this.tabOutput.TabIndex = 2;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(192, 346);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Parse Tree";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 346);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Output";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // headerMessage
-            // 
-            this.headerMessage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.headerMessage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.headerMessage.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.headerMessage.Location = new System.Drawing.Point(0, 0);
-            this.headerMessage.Name = "headerMessage";
-            this.headerMessage.Size = new System.Drawing.Size(200, 21);
-            this.headerMessage.TabIndex = 1;
-            this.headerMessage.Text = "Messages";
-            this.headerMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.headerMessage.UseCompatibleTextRendering = true;
+            this.tvParseTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvParseTree.Location = new System.Drawing.Point(3, 3);
+            this.tvParseTree.Name = "tvParseTree";
+            this.tvParseTree.Size = new System.Drawing.Size(186, 340);
+            this.tvParseTree.TabIndex = 0;
             // 
             // Form1
             // 
@@ -246,8 +257,9 @@
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.panelOutput.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.tabOutput.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,6 +282,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.TreeView tvParseTree;
     }
 }
 

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-using tccdotnet.Debug;
 
 namespace tccdotnet
 {
     /// <summary>
-    /// this class helps populate the treeview given a parsetree
+    /// This class was modified and is now independent - Aivan
     /// </summary>
     public sealed class ParseTreeViewer
     {
@@ -16,14 +15,14 @@ namespace tccdotnet
         {
         }
 
-        public static void Populate(TreeView treeview, IParseTree parsetree)
+        public static void Populate(TreeView treeview, ParseTree parsetree)
         {
             treeview.Visible = false;
             treeview.SuspendLayout();
             treeview.Nodes.Clear();
             treeview.Tag = parsetree;
 
-            IParseNode start = parsetree.INodes[0];
+            ParseNode start = parsetree.Nodes[0];
             TreeNode node = new TreeNode(start.Text);
             node.Tag = start;
             node.ForeColor = Color.SteelBlue;
@@ -35,9 +34,9 @@ namespace tccdotnet
             treeview.Visible = true;
         }
             
-        private static void PopulateNode(TreeNode node, IParseNode start)
+        private static void PopulateNode(TreeNode node, ParseNode start)
         {
-            foreach (IParseNode ipn in start.INodes)
+            foreach (ParseNode ipn in start.Nodes)
             {
                 TreeNode tn = new TreeNode(ipn.Text);
                 tn.Tag = ipn;
