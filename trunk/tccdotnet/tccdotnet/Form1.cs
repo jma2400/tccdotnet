@@ -65,21 +65,43 @@ namespace tccdotnet
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            Scanner scanner = new Scanner();
+            outputFloaty.Show();
+            showMessage = !showMessage;
 
+            tvParseTree.Nodes.Clear();
+            Scanner scanner = new Scanner();
+            //Parser parser = new Parser(scanner, new GrammarTree());
             Parser parser = new Parser(scanner);
 
             ParseTree tree = parser.Parse(codeEditorControl1.Document.Text);
-            int a = 0;
-            foreach (ParseError err in tree.Errors)
-            {
+            //object treeinstance = parsertype.InvokeMember("Parse", BindingFlags.InvokeMethod, null, parser, new object[] { input });
+            //IParseTree itree = treeinstance as IParseTree;
+            //int a = 0;
+            //foreach (ParseError err in tree.Errors)
+            //{
 
-                statusError.Text = String.Format("Line: {0,3}, Column: {1,3} : {2}", err.Line, err.Column, err.Message);
-                a++;
-                break;
+            //    statusError.Text = String.Format("Line: {0,3}, Column: {1,3} : {2}", err.Line, err.Column, err.Message);
+            //    a++;
+            //    break;
+            //}
+            //if (a == 0)
+            //    statusError.Text = string.Format("No Errors Found.");
+
+            //CompilerResult result = new CompilerResult();
+            if (tree.Errors.Count > 0)
+            {
+                foreach (ParseError err in tree.Errors)
+                {
+
+                    statusError.Text = String.Format("Line: {0,3}, Column: {1,3} : {2}", err.Line, err.Column, err.Message);
+                    break;
+                }
             }
-            if (a == 0)
+            else
                 statusError.Text = string.Format("No Errors Found.");
+
+            
+            ParseTreeViewer.Populate(tvParseTree, tree);
 
         }
 
