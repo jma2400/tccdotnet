@@ -1,0 +1,5 @@
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\bin\Release\parCer.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\bin\Release\parCer.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\obj\Release\parCer.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\obj\Release\parCer.pdb

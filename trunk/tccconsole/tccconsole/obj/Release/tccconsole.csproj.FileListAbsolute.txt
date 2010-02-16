@@ -1,0 +1,15 @@
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\bin\Release\tccconsole.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\bin\Release\tccconsole.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\obj\Release\tccconsole.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\obj\Release\tccconsole.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\parCer\bin\Release\tccconsole.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\parCer\bin\Release\tccconsole.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\parCer\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\parCer\obj\Release\tccconsole.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\parCer\obj\Release\tccconsole.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\bin\Release\tccconsole.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\bin\Release\tccconsole.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\obj\Release\tccconsole.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\obj\Release\tccconsole.pdb

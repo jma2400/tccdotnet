@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace tccdotnet
+namespace tccconsole
 {
     #region Parser
 
@@ -1342,7 +1342,7 @@ namespace tccdotnet
         private void ParseStatement(ParseNode parent)
         {
             Token tok;
-           ParseNode n;
+            ParseNode n;
             ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.Statement), "Statement");
             parent.Nodes.Add(node);
 
