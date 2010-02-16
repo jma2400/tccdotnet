@@ -118,6 +118,10 @@ int main(int *x,double b)
 	return f*(g);
 }
 
+long func(){
+ float arr[100][3];
+}
+
 long hotdog(int x)
 {
 	printf("hi");
@@ -125,4 +129,8 @@ long hotdog(int x)
 	a = &b;
 	b = 10;
 	c = *a;
+
+	//int x[5] = 5;
+	//x[5] = 5;
+
 }
