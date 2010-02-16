@@ -1,14 +1,10 @@
-1. Renamed 'Declaration' to 'GlobalDecl'
-2. Renamed 'InsideDeclaration' to 'LocalDecl'
-3. Fixed bug that allows a code like this:
-	int x[5](long y)
-	{
-		//code block here
-	}
-4. Added new terminal: VARIABLEPARAMS. This would allow a function code like this:
-	int y(int a, char b, ...) //this means the function accepts an indefinite # of params (except for the first two which are required)
-	{
-		//code block here
-	}
-5. Modified 'Assignment' to allow a code like this:
-	b = &a;   
+1. Changed: Start -> Header+ GlobalDecl* EOF;
+   To:      Start -> Header* GlobalDecl* EOF;
+
+2. Fixed bug that causes an error when parsing functions with no params.
+   
+   Changed: Function 	 -> LPAREN (Parameters|VOID) RPAREN (SEMICOL|CodeBlock);
+	    Parameters 	 -> ((DATATYPE POINTER? IDENTIFIER ParArray?)(COMMA ((DATATYPE POINTER? IDENTIFIER ParArray?)|VARIABLEPARAMS))*)?;
+   
+   To:	    Function 	 -> LPAREN (Parameters|VOID)? RPAREN (SEMICOL|CodeBlock);
+	    Parameters 	 -> ((DATATYPE POINTER? IDENTIFIER ParArray?)(COMMA ((DATATYPE POINTER? IDENTIFIER ParArray?)|VARIABLEPARAMS))*);
