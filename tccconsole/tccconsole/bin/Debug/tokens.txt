@@ -13,6 +13,27 @@ Token: int
 Token: x 
  Type: IDENTIFIER   Line:   2 
 
+Token: [ 
+ Type: LARRAY       Line:   2 
+
+Token: 20 
+ Type: NUMBER       Line:   2 
+
+Token: ] 
+ Type: RARRAY       Line:   2 
+
+Token: = 
+ Type: EQUALS       Line:   2 
+
+Token: { 
+ Type: LBRACE       Line:   2 
+
+Token: "X" 
+ Type: STRING       Line:   2 
+
+Token: } 
+ Type: RBRACE       Line:   2 
+
 Token: , 
  Type: COMMA        Line:   2 
 
@@ -62,30 +83,75 @@ Token: int
  Type: DATATYPE     Line:   2 
 
 Token: y 
+ Type: IDENTIFIER   Line:   2 
+
+Token: ; 
+ Type: SEMICOL      Line:   2 
+
+Token: float 
+ Type: DATATYPE     Line:   2 
+
+Token: * 
+ Type: POINTER      Line:   3 
+
+Token: we 
  Type: IDENTIFIER   Line:   3 
+
+Token: = 
+ Type: EQUALS       Line:   3 
+
+Token: 2 
+ Type: NUMBER       Line:   3 
 
 Token: ; 
  Type: SEMICOL      Line:   3 
 
-Token: float 
+Token: char 
  Type: DATATYPE     Line:   3 
 
-Token: we 
+Token: str 
  Type: IDENTIFIER   Line:   4 
+
+Token: [ 
+ Type: LARRAY       Line:   4 
+
+Token: 100 
+ Type: NUMBER       Line:   4 
+
+Token: ] 
+ Type: RARRAY       Line:   4 
 
 Token: = 
  Type: EQUALS       Line:   4 
 
-Token: 2 
- Type: NUMBER       Line:   4 
+Token: { 
+ Type: LBRACE       Line:   4 
+
+Token: "peter" 
+ Type: STRING       Line:   4 
+
+Token: , 
+ Type: COMMA        Line:   4 
+
+Token: "aivan" 
+ Type: STRING       Line:   4 
+
+Token: , 
+ Type: COMMA        Line:   4 
+
+Token: "pj" 
+ Type: STRING       Line:   4 
+
+Token: } 
+ Type: RBRACE       Line:   4 
 
 Token: ; 
  Type: SEMICOL      Line:   4 
 
-Token: int 
+Token: float 
  Type: DATATYPE     Line:   4 
 
-Token: main 
+Token: calc 
  Type: IDENTIFIER   Line:   6 
 
 Token: ( 
@@ -94,59 +160,65 @@ Token: (
 Token: int 
  Type: DATATYPE     Line:   6 
 
-Token: x 
+Token: oper 
  Type: IDENTIFIER   Line:   6 
 
 Token: , 
  Type: COMMA        Line:   6 
 
-Token: double 
+Token: float 
  Type: DATATYPE     Line:   6 
 
-Token: b 
+Token: oper1 
+ Type: IDENTIFIER   Line:   6 
+
+Token: , 
+ Type: COMMA        Line:   6 
+
+Token: float 
+ Type: DATATYPE     Line:   6 
+
+Token: oper2 
  Type: IDENTIFIER   Line:   6 
 
 Token: ) 
  Type: RPAREN       Line:   6 
 
-Token: { 
- Type: LBRACE       Line:   6 
+Token: ; 
+ Type: SEMICOL      Line:   6 
+
+Token: int 
+ Type: DATATYPE     Line:   6 
+
+Token: main 
+ Type: IDENTIFIER   Line:   8 
+
+Token: ( 
+ Type: LPAREN       Line:   8 
+
+Token: int 
+ Type: DATATYPE     Line:   8 
+
+Token: * 
+ Type: POINTER      Line:   8 
 
 Token: x 
- Type: IDENTIFIER   Line:   7 
-
-Token: = 
- Type: EQUALS       Line:   8 
-
-Token: 2 
- Type: NUMBER       Line:   8 
-
-Token: ; 
- Type: SEMICOL      Line:   8 
-
-Token: d 
  Type: IDENTIFIER   Line:   8 
 
-Token: = 
- Type: EQUALS       Line:   8 
+Token: , 
+ Type: COMMA        Line:   8 
 
-Token: 2 
- Type: NUMBER       Line:   8 
+Token: double 
+ Type: DATATYPE     Line:   8 
 
-Token: ; 
- Type: SEMICOL      Line:   8 
-
-Token: a 
+Token: b 
  Type: IDENTIFIER   Line:   8 
 
-Token: = 
- Type: EQUALS       Line:   9 
+Token: ) 
+ Type: RPAREN       Line:   8 
 
-Token: 1 
- Type: NUMBER       Line:   9 
-
-Token: ; 
- Type: SEMICOL      Line:   9 
+Token: { 
+ Type: LBRACE       Line:   8 
 
 Token: int 
  Type: DATATYPE     Line:   9 
@@ -199,17 +271,32 @@ Token: 4
 Token: ; 
  Type: SEMICOL      Line:  11 
 
-Token: if 
- Type: IF           Line:  11 
+Token: z 
+ Type: IDENTIFIER   Line:  11 
+
+Token: = 
+ Type: EQUALS       Line:  13 
 
 Token: ( 
  Type: LPAREN       Line:  13 
 
-Token: x 
- Type: IDENTIFIER   Line:  13 
+Token: ( 
+ Type: LPAREN       Line:  13 
 
-Token: == 
- Type: RELOP        Line:  13 
+Token: 5 
+ Type: NUMBER       Line:  13 
+
+Token: + 
+ Type: ARTOPERATOR  Line:  13 
+
+Token: 4 
+ Type: NUMBER       Line:  13 
+
+Token: ) 
+ Type: RPAREN       Line:  13 
+
+Token: * 
+ Type: ARTOPERATOR  Line:  13 
 
 Token: 2 
  Type: NUMBER       Line:  13 
@@ -217,32 +304,38 @@ Token: 2
 Token: ) 
  Type: RPAREN       Line:  13 
 
-Token: { 
- Type: LBRACE       Line:  13 
+Token: / 
+ Type: ARTOPERATOR  Line:  13 
 
-Token: int 
- Type: DATATYPE     Line:  14 
+Token: 3 
+ Type: NUMBER       Line:  13 
 
-Token: x 
- Type: IDENTIFIER   Line:  15 
+Token: ; 
+ Type: SEMICOL      Line:  13 
 
-Token: = 
- Type: EQUALS       Line:  15 
+Token: printf 
+ Type: PRINTF       Line:  13 
 
-Token: 2 
- Type: NUMBER       Line:  15 
+Token: ( 
+ Type: LPAREN       Line:  15 
+
+Token: "hello world %d, %d" 
+ Type: STRING       Line:  15 
 
 Token: , 
  Type: COMMA        Line:  15 
 
-Token: c 
+Token: x 
  Type: IDENTIFIER   Line:  15 
 
-Token: = 
- Type: EQUALS       Line:  15 
+Token: [ 
+ Type: LARRAY       Line:  15 
 
-Token: 2 
- Type: NUMBER       Line:  15 
+Token: x 
+ Type: IDENTIFIER   Line:  15 
+
+Token: ] 
+ Type: RARRAY       Line:  15 
 
 Token: , 
  Type: COMMA        Line:  15 
@@ -250,35 +343,35 @@ Token: ,
 Token: d 
  Type: IDENTIFIER   Line:  15 
 
-Token: , 
- Type: COMMA        Line:  15 
+Token: [ 
+ Type: LARRAY       Line:  15 
 
-Token: a 
- Type: IDENTIFIER   Line:  15 
+Token: 12 
+ Type: NUMBER       Line:  15 
+
+Token: ] 
+ Type: RARRAY       Line:  15 
+
+Token: ) 
+ Type: RPAREN       Line:  15 
 
 Token: ; 
  Type: SEMICOL      Line:  15 
 
-Token: p 
- Type: IDENTIFIER   Line:  15 
-
-Token: = 
- Type: EQUALS       Line:  16 
-
-Token: 2 
- Type: NUMBER       Line:  16 
-
-Token: ; 
- Type: SEMICOL      Line:  16 
-
-Token: switch 
- Type: SWITCH       Line:  16 
+Token: if 
+ Type: IF           Line:  15 
 
 Token: ( 
  Type: LPAREN       Line:  17 
 
-Token: dsd 
+Token: x 
  Type: IDENTIFIER   Line:  17 
+
+Token: == 
+ Type: RELOP        Line:  17 
+
+Token: 2 
+ Type: NUMBER       Line:  17 
 
 Token: ) 
  Type: RPAREN       Line:  17 
@@ -286,86 +379,134 @@ Token: )
 Token: { 
  Type: LBRACE       Line:  17 
 
-Token: case 
- Type: CASE         Line:  18 
+Token: int 
+ Type: DATATYPE     Line:  18 
 
-Token: 3 
+Token: x 
+ Type: IDENTIFIER   Line:  19 
+
+Token: = 
+ Type: EQUALS       Line:  19 
+
+Token: 2 
  Type: NUMBER       Line:  19 
 
-Token: : 
- Type: COLON        Line:  19 
+Token: , 
+ Type: COMMA        Line:  19 
 
-Token: b 
+Token: c 
+ Type: IDENTIFIER   Line:  19 
+
+Token: = 
+ Type: EQUALS       Line:  19 
+
+Token: 2 
+ Type: NUMBER       Line:  19 
+
+Token: , 
+ Type: COMMA        Line:  19 
+
+Token: d 
+ Type: IDENTIFIER   Line:  19 
+
+Token: , 
+ Type: COMMA        Line:  19 
+
+Token: a 
+ Type: IDENTIFIER   Line:  19 
+
+Token: ; 
+ Type: SEMICOL      Line:  19 
+
+Token: p 
  Type: IDENTIFIER   Line:  19 
 
 Token: = 
  Type: EQUALS       Line:  20 
 
-Token: 5 
- Type: NUMBER       Line:  20 
-
-Token: + 
- Type: ARTOPERATOR  Line:  20 
-
 Token: 2 
- Type: NUMBER       Line:  20 
-
-Token: / 
- Type: ARTOPERATOR  Line:  20 
-
-Token: 4 
  Type: NUMBER       Line:  20 
 
 Token: ; 
  Type: SEMICOL      Line:  20 
 
-Token: default 
- Type: DEFAULT      Line:  20 
+Token: switch 
+ Type: SWITCH       Line:  20 
+
+Token: ( 
+ Type: LPAREN       Line:  21 
+
+Token: dsd 
+ Type: IDENTIFIER   Line:  21 
+
+Token: ) 
+ Type: RPAREN       Line:  21 
+
+Token: { 
+ Type: LBRACE       Line:  21 
+
+Token: case 
+ Type: CASE         Line:  22 
+
+Token: 3 
+ Type: NUMBER       Line:  23 
 
 Token: : 
- Type: COLON        Line:  22 
+ Type: COLON        Line:  23 
 
-Token: int 
- Type: DATATYPE     Line:  22 
-
-Token: c 
+Token: b 
  Type: IDENTIFIER   Line:  23 
 
 Token: = 
- Type: EQUALS       Line:  23 
+ Type: EQUALS       Line:  24 
 
 Token: 5 
- Type: NUMBER       Line:  23 
+ Type: NUMBER       Line:  24 
+
+Token: + 
+ Type: ARTOPERATOR  Line:  24 
+
+Token: 2 
+ Type: NUMBER       Line:  24 
+
+Token: / 
+ Type: ARTOPERATOR  Line:  24 
+
+Token: 4 
+ Type: NUMBER       Line:  24 
 
 Token: ; 
- Type: SEMICOL      Line:  23 
+ Type: SEMICOL      Line:  24 
+
+Token: default 
+ Type: DEFAULT      Line:  24 
+
+Token: : 
+ Type: COLON        Line:  26 
+
+Token: int 
+ Type: DATATYPE     Line:  26 
+
+Token: c 
+ Type: IDENTIFIER   Line:  27 
+
+Token: = 
+ Type: EQUALS       Line:  27 
+
+Token: 5 
+ Type: NUMBER       Line:  27 
+
+Token: ; 
+ Type: SEMICOL      Line:  27 
 
 Token: } 
- Type: RBRACE       Line:  23 
+ Type: RBRACE       Line:  27 
 
 Token: } 
- Type: RBRACE       Line:  24 
-
-Token: // This is a commentline
- 
- Type: COMMENTLINE  Line:  26 
-
-Token: /*
-     And another commentblock
-   */ 
- Type: COMMENTBLOCK Line:  26 
-
-Token: // This is a commentline
- 
- Type: COMMENTLINE  Line:  26 
-
-Token: /*
-     And another commentblock
-   */ 
- Type: COMMENTBLOCK Line:  26 
+ Type: RBRACE       Line:  28 
 
 Token: switch 
- Type: SWITCH       Line:  26 
+ Type: SWITCH       Line:  30 
 
 Token: ( 
  Type: LPAREN       Line:  32 
@@ -937,6 +1078,18 @@ Token: 999
 Token: ; 
  Type: SEMICOL      Line:  89 
 
+Token: //if(){}
+ 
+ Type: COMMENTLINE  Line:  89 
+
+Token: //if(){}
+ 
+ Type: COMMENTLINE  Line:  89 
+
+Token: //if(){}
+ 
+ Type: COMMENTLINE  Line:  89 
+
 Token: } 
  Type: RBRACE       Line:  89 
 
@@ -1123,4 +1276,131 @@ Token: 2
 Token: ; 
  Type: SEMICOL      Line: 106 
 
-Token
+Token: } 
+ Type: RBRACE       Line: 106 
+
+Token: printf 
+ Type: PRINTF       Line: 107 
+
+Token: ( 
+ Type: LPAREN       Line: 109 
+
+Token: "hello %d, %d" 
+ Type: STRING       Line: 109 
+
+Token: , 
+ Type: COMMA        Line: 109 
+
+Token: x 
+ Type: IDENTIFIER   Line: 109 
+
+Token: [ 
+ Type: LARRAY       Line: 109 
+
+Token: x 
+ Type: IDENTIFIER   Line: 109 
+
+Token: ] 
+ Type: RARRAY       Line: 109 
+
+Token: , 
+ Type: COMMA        Line: 109 
+
+Token: d 
+ Type: IDENTIFIER   Line: 109 
+
+Token: [ 
+ Type: LARRAY       Line: 109 
+
+Token: 12 
+ Type: NUMBER       Line: 109 
+
+Token: ] 
+ Type: RARRAY       Line: 109 
+
+Token: ) 
+ Type: RPAREN       Line: 109 
+
+Token: ; 
+ Type: SEMICOL      Line: 109 
+
+Token: scanf 
+ Type: SCANF        Line: 109 
+
+Token: ( 
+ Type: LPAREN       Line: 110 
+
+Token: "%d" 
+ Type: TYPESPEC     Line: 110 
+
+Token: , 
+ Type: COMMA        Line: 110 
+
+Token: & 
+ Type: REFOPER      Line: 110 
+
+Token: x 
+ Type: IDENTIFIER   Line: 110 
+
+Token: ) 
+ Type: RPAREN       Line: 110 
+
+Token: ; 
+ Type: SEMICOL      Line: 110 
+
+Token: return 
+ Type: RETURN       Line: 110 
+
+Token: v 
+ Type: IDENTIFIER   Line: 112 
+
+Token: ; 
+ Type: SEMICOL      Line: 112 
+
+Token: return 
+ Type: RETURN       Line: 112 
+
+Token: 2 
+ Type: NUMBER       Line: 113 
+
+Token: ; 
+ Type: SEMICOL      Line: 113 
+
+Token: return 
+ Type: RETURN       Line: 113 
+
+Token: x 
+ Type: IDENTIFIER   Line: 114 
+
+Token: + 
+ Type: ARTOPERATOR  Line: 114 
+
+Token: 2 
+ Type: NUMBER       Line: 114 
+
+Token: ; 
+ Type: SEMICOL      Line: 114 
+
+Token: return 
+ Type: RETURN       Line: 114 
+
+Token: g 
+ Type: IDENTIFIER   Line: 115 
+
+Token: + 
+ Type: ARTOPERATOR  Line: 115 
+
+Token: k 
+ Type: IDENTIFIER   Line: 115 
+
+Token: ; 
+ Type: SEMICOL      Line: 115 
+
+Token: return 
+ Type: RETURN       Line: 115 
+
+Token: ( 
+ Type: LPAREN       Line: 116 
+
+Token: j 
+ Type: IDENTIFIER   L
