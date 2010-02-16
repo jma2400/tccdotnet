@@ -59,7 +59,7 @@ COMMENTBLOCK 	-> @"/\*[^*]*\*+(?:[^/*][^*]*\*+)*/";
 
 /* === C-language CFG === */
 
-Start 		 -> Header+ GlobalDecl* EOF;
+Start 		 -> Header* GlobalDecl* EOF;
 
 /* Pre-processor directives */
 Header 	 -> SHARP INCLUDE DIRECTIVE;
@@ -71,10 +71,6 @@ Header 	 -> SHARP INCLUDE DIRECTIVE;
 
 GlobalDecl 	 -> (DATATYPE|VOID) POINTER? IDENTIFIER (Function? 
 				| (Array|DecAssignment)? (COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL);
-
-
-/*GlobalDecl 	 -> (DATATYPE|VOID) POINTER? IDENTIFIER (Function? 
-				| (Array|DecAssignment)? (COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL);*/
 
 //Array Declaration
 Array		 -> (LARRAY NUMBER RARRAY)+ ArAssignment?;	

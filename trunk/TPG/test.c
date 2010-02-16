@@ -3,11 +3,15 @@ int x[20]={"X"},t=2,c,f,g,e=2;int y;
 float *we=2;
 char str[100]={"peter", "aivan", "pj"};
 
+float calc(int oper,float oper1,float oper2);
 
 int main(int *x,double b)
 {	
 	int y=2,r,t,w,e;
 	z=4;
+	
+	z = ((5+4)*2)/3;
+	
 	printf("hello world %d, %d",x[x], d[12]);
 
 	if(x==2)
