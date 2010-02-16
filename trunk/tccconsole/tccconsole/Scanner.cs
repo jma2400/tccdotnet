@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace tccconsole
 {
@@ -24,8 +25,11 @@ namespace tccconsole
         private List<TokenType> Tokens;
         private List<TokenType> SkipList; // tokens to be skipped
 
+        private StreamWriter fstream;
         public Scanner()
         {
+            fstream = new StreamWriter("tokens.txt",false);
+            
             Regex regex;
             Patterns = new Dictionary<TokenType, Regex>();
             Tokens = new List<TokenType>();
@@ -333,6 +337,14 @@ namespace tccconsole
                     tok.EndPos = startpos + len;
                     tok.Text = Input.Substring(tok.StartPos, len);
                     tok.Type = index;
+                    if (tok.Type != TokenType.WHITESPACE)
+                    {
+                        ConsoleColor.SetForeGroundColour(ConsoleColor.ForeGroundColour.Green, true);
+                        Console.WriteLine("Token: {0} \n Type: {1,-12} Line: {2,3} \n", tok.Text, tok.Type, tok.LinePos);
+                        ConsoleColor.SetForeGroundColour();
+
+                        fstream.WriteLine("Token: {0} \n Type: {1,-12} Line: {2,3} \n", tok.Text, tok.Type, tok.LinePos);
+                    }
                 }
                 else
                 {

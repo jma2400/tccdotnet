@@ -7,3 +7,6 @@ C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole
 C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\parCer\obj\Debug\tccconsole.pdb
 C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\obj\Debug\tccconsole.exe
 C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\obj\Debug\tccconsole.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\bin\Debug\tccconsole.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\bin\Debug\tccconsole.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccconsole\tccconsole\obj\Debug\ResolveAssemblyReference.cache

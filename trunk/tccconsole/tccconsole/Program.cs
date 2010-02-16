@@ -42,7 +42,7 @@ namespace tccconsole
             foreach (ParseError err in tree.Errors)
             {
                 ConsoleColor.SetForeGroundColour(ConsoleColor.ForeGroundColour.Red, true);
-                Console.WriteLine("Line: {0,3}, Column: {1,3} : {2}",err.Line,err.Column,err.Message);
+                Console.WriteLine("Line: {0,3}, Column: {1,3} : {2}", err.Line, err.Column, err.Message);
                 ConsoleColor.SetForeGroundColour();
                 a++;
                 break;
@@ -51,6 +51,9 @@ namespace tccconsole
                 Console.WriteLine("{0} Error Found.", a);
             else
                 Console.WriteLine("No Errors Found.");
+
+            //scanner.Init(input);
+
 
         }
 
