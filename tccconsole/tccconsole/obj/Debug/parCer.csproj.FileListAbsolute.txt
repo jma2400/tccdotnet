@@ -1,0 +1,10 @@
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer\parCer\bin\Debug\parCer.exe
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer\parCer\bin\Debug\parCer.pdb
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer\parCer\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer\parCer\obj\Debug\parCer.exe
+C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\parCer\parCer\obj\Debug\parCer.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\obj\Debug\parCer.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\obj\Debug\parCer.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\bin\Debug\parCer.exe
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\bin\Debug\parCer.pdb
+C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\parCer\parCer\parCer\obj\Debug\ResolveAssemblyReference.cache
