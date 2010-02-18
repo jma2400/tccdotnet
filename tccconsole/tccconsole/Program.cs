@@ -26,33 +26,24 @@ namespace tccconsole
 
         public static void TestFromFile(string filename)
         {
-            StreamReader reader = null;
+            StreamWriter fstream = new StreamWriter("tokens.txt", false);
 
+            StreamReader reader = null;
             reader = new StreamReader(filename);
 
             Scanner scanner = new Scanner();
 
-            Parser parser = new Parser(scanner);
-
             string input = reader.ReadToEnd();
 
-
-            ParseTree tree = parser.Parse(input);
-            int a = 0;
-            foreach (ParseError err in tree.Errors)
+            scanner.Init(input);
+            Token tok = new Token();
+            do
             {
-                ConsoleColor.SetForeGroundColour(ConsoleColor.ForeGroundColour.Red, true);
-                Console.WriteLine("Line: {0,3}, Column: {1,3} : {2}", err.Line, err.Column, err.Message);
-                ConsoleColor.SetForeGroundColour();
-                a++;
-                break;
-            }
-            if (a > 0)
-                Console.WriteLine("{0} Error Found.", a);
-            else
-                Console.WriteLine("No Errors Found.");
-
-            //scanner.Init(input);
+                //tok = scanner.Scan(scanner.Tokens.ToArray());
+                tok = scanner.Scan();
+                //Here yay
+                fstream.WriteLine("Token: {0} \r\n Type: {1,-12} Line: {2,3} \r\n", tok.Text, tok.Type, tok.LinePos);
+            } while (input.Length != tok.EndPos);
 
 
         }

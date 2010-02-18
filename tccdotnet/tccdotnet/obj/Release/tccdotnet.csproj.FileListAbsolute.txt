@@ -1,13 +1,13 @@
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\tccdotnet.exe
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\tccdotnet.pdb
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.CodeEditor.dll
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.Docking.dll
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.Scripting.ScriptRun.dll
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.SyntaxDocument.dll
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.SyntaxFiles.dll
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\ResolveAssemblyReference.cache
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.Form1.resources
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.Properties.Resources.resources
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.csproj.GenerateResource.Cache
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.exe
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.pdb
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\bin\Release\tccdotnet.exe
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\bin\Release\tccdotnet.pdb
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\bin\Release\AIMS.CodeEditor.dll
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\bin\Release\AIMS.Docking.dll
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\bin\Release\AIMS.Scripting.ScriptRun.dll
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\bin\Release\AIMS.SyntaxDocument.dll
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\bin\Release\AIMS.SyntaxFiles.dll
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Release\tccdotnet.Form1.resources
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Release\tccdotnet.Properties.Resources.resources
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Release\tccdotnet.csproj.GenerateResource.Cache
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Release\tccdotnet.exe
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Release\tccdotnet.pdb

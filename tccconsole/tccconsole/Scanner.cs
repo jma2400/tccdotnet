@@ -22,14 +22,11 @@ namespace tccconsole
         public Dictionary<TokenType, Regex> Patterns;
 
         private Token LookAheadToken;
-        private List<TokenType> Tokens;
+        public List<TokenType> Tokens;
         private List<TokenType> SkipList; // tokens to be skipped
-
-        private StreamWriter fstream;
         public Scanner()
         {
-            fstream = new StreamWriter("tokens.txt",false);
-            
+                   
             Regex regex;
             Patterns = new Dictionary<TokenType, Regex>();
             Tokens = new List<TokenType>();
@@ -342,8 +339,6 @@ namespace tccconsole
                         ConsoleColor.SetForeGroundColour(ConsoleColor.ForeGroundColour.Green, true);
                         Console.WriteLine("Token: {0} \n Type: {1,-12} Line: {2,3} \n", tok.Text, tok.Type, tok.LinePos);
                         ConsoleColor.SetForeGroundColour();
-
-                        fstream.WriteLine("Token: {0} \n Type: {1,-12} Line: {2,3} \n", tok.Text, tok.Type, tok.LinePos);
                     }
                 }
                 else
@@ -375,46 +370,6 @@ namespace tccconsole
             //Non terminal tokens:
             _NONE_  = 0,
             _UNDETERMINED_= 1,
-
-            //Non terminal tokens:
-            Start   = 2,
-            Header  = 3,
-            GlobalDecl= 4,
-            Array   = 5,
-            ArAssignment= 6,
-            ArContent= 7,
-            VarArray= 8,
-            LocalDecl= 9,
-            Assignment= 10,
-            DecAssignment= 11,
-            Expr    = 12,
-            Char    = 13,
-            Atom    = 14,
-            Function= 15,
-            Parameters= 16,
-            ParArray= 17,
-            CodeBlock= 18,
-            Break   = 19,
-            Switch  = 20,
-            SwitchCase= 21,
-            CaseComp= 22,
-            Statement= 23,
-            If      = 24,
-            Condition= 25,
-            CondLogExpr= 26,
-            CondExpr= 27,
-            Else    = 28,
-            IfForLoopBlock= 29,
-            For     = 30,
-            ForDeclaration= 31,
-            ForAssignment= 32,
-            Increment= 33,
-            While   = 34,
-            DoWhile = 35,
-            WhileLoopBlock= 36,
-            Printf  = 37,
-            Scanf   = 38,
-            Return  = 39,
 
             //Terminal tokens:
             DIRECTIVE= 40,
