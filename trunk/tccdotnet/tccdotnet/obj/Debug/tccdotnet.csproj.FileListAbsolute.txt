@@ -1,8 +1,8 @@
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Debug\tccdotnet.exe
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Debug\tccdotnet.pdb
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.Form1.resources
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.Properties.Resources.resources
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.csproj.GenerateResource.Cache
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.exe
-C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.pdb
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\bin\Debug\tccdotnet.exe
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\bin\Debug\tccdotnet.pdb
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Debug\tccdotnet.Form1.resources
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Debug\tccdotnet.Properties.Resources.resources
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Debug\tccdotnet.csproj.GenerateResource.Cache
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Debug\tccdotnet.exe
+C:\Users\Aivan\Documents\Visual Studio 2008\Projects\PROGLAN\tccdotnet\tccdotnet\obj\Debug\tccdotnet.pdb
