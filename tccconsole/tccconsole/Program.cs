@@ -45,6 +45,13 @@ namespace tccconsole
                 fstream.WriteLine("Token: {0} \r\n Type: {1,-12} Line: {2,3} \r\n", tok.Text, tok.Type, tok.LinePos);
             } while (input.Length != tok.EndPos);
 
+            
+            //Token tkn = new Token();
+            //do
+            //{
+            //    tkn = scanner.LookAhead();
+            //}
+            //while (true);
 
         }
 
