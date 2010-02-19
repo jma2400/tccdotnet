@@ -88,8 +88,8 @@ Expr 		 -> Atom (ARTOPERATOR Atom)*;
 Char		 -> QUOT CHARVALUE QUOT;
 Atom 		 -> NUMBER | ((POINTER|REFOPER)? IDENTIFIER VarArray?) | LPAREN Expr RPAREN;
 
-Function 	 -> LPAREN (Parameters|VOID)? RPAREN (SEMICOL|CodeBlock);
-Parameters 	 -> ((DATATYPE POINTER? IDENTIFIER ParArray?)(COMMA ((DATATYPE POINTER? IDENTIFIER ParArray?)|VARIABLEPARAMS))*);
+Function 	 -> LPAREN (Parameters|VOID) RPAREN (SEMICOL|CodeBlock);
+Parameters 	 -> ((DATATYPE POINTER? IDENTIFIER ParArray?)(COMMA ((DATATYPE POINTER? IDENTIFIER ParArray?)|VARIABLEPARAMS))*)?;
 ParArray	 -> (LARRAY NUMBER RARRAY)*;
 CodeBlock	 -> BOOL|(LBRACE Statement* RBRACE);
 Break		 -> BREAK SEMICOL;
