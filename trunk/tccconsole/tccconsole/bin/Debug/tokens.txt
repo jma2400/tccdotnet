@@ -1211,3 +1211,56 @@ Token: (
  Type: LPAREN       Line: 117 
 
 Token: int 
+ Type: DATATYPE     Line: 117 
+
+Token: a 
+ Type: IDENTIFIER   Line: 117 
+
+Token: ) 
+ Type: RPAREN       Line: 117 
+
+Token: { 
+ Type: LBRACE       Line: 117 
+
+Token: printf 
+ Type: PRINTF       Line: 118 
+
+Token: ( 
+ Type: LPAREN       Line: 119 
+
+Token: "this is just a test function" 
+ Type: STRING       Line: 119 
+
+Token: ) 
+ Type: RPAREN       Line: 119 
+
+Token: ; 
+ Type: SEMICOL      Line: 119 
+
+Token: return 
+ Type: RETURN       Line: 119 
+
+Token: f 
+ Type: IDENTIFIER   Line: 120 
+
+Token: * 
+ Type: ARTOPERATOR  Line: 120 
+
+Token: ( 
+ Type: LPAREN       Line: 120 
+
+Token: g 
+ Type: IDENTIFIER   Line: 120 
+
+Token: ) 
+ Type: RPAREN       Line: 120 
+
+Token: ; 
+ Type: SEMICOL      Line: 120 
+
+Token: } 
+ Type: RBRACE       Line: 120 
+
+Token:  
+ Type: CASECHAR     Line: 121 
+

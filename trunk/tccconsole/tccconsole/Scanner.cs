@@ -334,12 +334,7 @@ namespace tccconsole
                     tok.EndPos = startpos + len;
                     tok.Text = Input.Substring(tok.StartPos, len);
                     tok.Type = index;
-                    if (tok.Type != TokenType.WHITESPACE)
-                    {
-                        ConsoleColor.SetForeGroundColour(ConsoleColor.ForeGroundColour.Green, true);
-                        Console.WriteLine("Token: {0} \n Type: {1,-12} Line: {2,3} \n", tok.Text, tok.Type, tok.LinePos);
-                        ConsoleColor.SetForeGroundColour();
-                    }
+
                 }
                 else
                 {
