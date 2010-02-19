@@ -42,16 +42,18 @@ namespace tccconsole
                 //tok = scanner.Scan(scanner.Tokens.ToArray());
                 tok = scanner.Scan();
                 //Here yay
-                fstream.WriteLine("Token: {0} \r\n Type: {1,-12} Line: {2,3} \r\n", tok.Text, tok.Type, tok.LinePos);
-            } while (input.Length != tok.EndPos);
+                if (tok.Type != TokenType.WHITESPACE)
 
-            
-            //Token tkn = new Token();
-            //do
-            //{
-            //    tkn = scanner.LookAhead();
-            //}
-            //while (true);
+                {
+                    ConsoleColor.SetForeGroundColour(ConsoleColor.ForeGroundColour.Green, true);
+                    Console.WriteLine("Token: {0} \n Type: {1,-12} Line: {2,3} \n", tok.Text, tok.Type, tok.LinePos);
+                    fstream.WriteLine("Token: {0} \r\n Type: {1,-12} Line: {2,3} \r\n", tok.Text, tok.Type, tok.LinePos);
+                    ConsoleColor.SetForeGroundColour();
+                }
+            } while (input.Length != tok.EndPos);
+           
+            //Closing the streamwriter fixes the bug
+            fstream.Close();
 
         }
 
