@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.IO;
 
 namespace tccconsole
 {
@@ -22,11 +21,11 @@ namespace tccconsole
         public Dictionary<TokenType, Regex> Patterns;
 
         private Token LookAheadToken;
-        public List<TokenType> Tokens;
+        private List<TokenType> Tokens;
         private List<TokenType> SkipList; // tokens to be skipped
+
         public Scanner()
         {
-                   
             Regex regex;
             Patterns = new Dictionary<TokenType, Regex>();
             Tokens = new List<TokenType>();
@@ -115,12 +114,8 @@ namespace tccconsole
             Tokens.Add(TokenType.IDENTIFIER);
 
             regex = new Regex(@"([a-zA-Z_]|[0-9_])", RegexOptions.Compiled);
-            Patterns.Add(TokenType.CHARIDENT, regex);
-            Tokens.Add(TokenType.CHARIDENT);
-
-            regex = new Regex(@"([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_])", RegexOptions.Compiled);
-            Patterns.Add(TokenType.CHARIDENT2, regex);
-            Tokens.Add(TokenType.CHARIDENT2);
+            Patterns.Add(TokenType.CHARVALUE, regex);
+            Tokens.Add(TokenType.CHARVALUE);
 
             regex = new Regex(@"\+|-|%|/|\*", RegexOptions.Compiled);
             Patterns.Add(TokenType.ARTOPERATOR, regex);
@@ -334,7 +329,6 @@ namespace tccconsole
                     tok.EndPos = startpos + len;
                     tok.Text = Input.Substring(tok.StartPos, len);
                     tok.Type = index;
-
                 }
                 else
                 {
@@ -366,6 +360,46 @@ namespace tccconsole
             _NONE_  = 0,
             _UNDETERMINED_= 1,
 
+            //Non terminal tokens:
+            Start   = 2,
+            Header  = 3,
+            GlobalDecl= 4,
+            Array   = 5,
+            ArAssignment= 6,
+            ArContent= 7,
+            VarArray= 8,
+            LocalDecl= 9,
+            Assignment= 10,
+            DecAssignment= 11,
+            Expr    = 12,
+            Char    = 13,
+            Atom    = 14,
+            Function= 15,
+            Parameters= 16,
+            ParArray= 17,
+            CodeBlock= 18,
+            Break   = 19,
+            Switch  = 20,
+            SwitchCase= 21,
+            CaseComp= 22,
+            Statement= 23,
+            If      = 24,
+            Condition= 25,
+            CondLogExpr= 26,
+            CondExpr= 27,
+            Else    = 28,
+            IfForLoopBlock= 29,
+            For     = 30,
+            ForDeclaration= 31,
+            ForAssignment= 32,
+            Increment= 33,
+            While   = 34,
+            DoWhile = 35,
+            WhileLoopBlock= 36,
+            Printf  = 37,
+            Scanf   = 38,
+            Return  = 39,
+
             //Terminal tokens:
             DIRECTIVE= 40,
             DATATYPE= 41,
@@ -386,38 +420,37 @@ namespace tccconsole
             TYPESPEC= 56,
             REFOPER = 57,
             IDENTIFIER= 58,
-            CHARIDENT= 59,
-            CHARIDENT2= 60,
-            ARTOPERATOR= 61,
-            CASECHAR= 62,
-            NUMBER  = 63,
-            QUOT    = 64,
-            DQUOT   = 65,
-            POINTER = 66,
-            COMMA   = 67,
-            EQUALS  = 68,
-            SEMICOL = 69,
-            COLON   = 70,
-            SHARP   = 71,
-            EOF     = 72,
-            LPAREN  = 73,
-            RPAREN  = 74,
-            LBRACE  = 75,
-            RBRACE  = 76,
-            LARRAY  = 77,
-            RARRAY  = 78,
-            RELOP   = 79,
-            LOGOP   = 80,
-            INCRE   = 81,
-            BOOL    = 82,
-            NOT     = 83,
-            NULL    = 84,
-            STRING  = 85,
-            VARIABLEPARAMS= 86,
-            WHITESPACE= 87,
-            EOL     = 88,
-            COMMENTLINE= 89,
-            COMMENTBLOCK= 90
+            CHARVALUE= 59,
+            ARTOPERATOR= 60,
+            CASECHAR= 61,
+            NUMBER  = 62,
+            QUOT    = 63,
+            DQUOT   = 64,
+            POINTER = 65,
+            COMMA   = 66,
+            EQUALS  = 67,
+            SEMICOL = 68,
+            COLON   = 69,
+            SHARP   = 70,
+            EOF     = 71,
+            LPAREN  = 72,
+            RPAREN  = 73,
+            LBRACE  = 74,
+            RBRACE  = 75,
+            LARRAY  = 76,
+            RARRAY  = 77,
+            RELOP   = 78,
+            LOGOP   = 79,
+            INCRE   = 80,
+            BOOL    = 81,
+            NOT     = 82,
+            NULL    = 83,
+            STRING  = 84,
+            VARIABLEPARAMS= 85,
+            WHITESPACE= 86,
+            EOL     = 87,
+            COMMENTLINE= 88,
+            COMMENTBLOCK= 89
     }
 
     public class Token
