@@ -18,8 +18,8 @@ BREAK         -> @"break";
 TYPESPEC	-> @"@?\""%[dfsc]\""";
 REFOPER	-> @"&";
 IDENTIFIER   	-> @"[a-zA-Z_][a-zA-Z0-9_]*";
-CHARIDENT	-> @"([a-zA-Z_]|[0-9_])";
-CHARIDENT2	-> @"([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_])";
+CHARVALUE	-> @"([a-zA-Z_]|[0-9_])";
+//CHARVALUE2    -> @"([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_])";
 ARTOPERATOR	-> @"\+|-|%|/|\*";
 CASECHAR	-> @"[a-zA-Z_]*";
 NUMBER		-> @"[0-9]+";
@@ -83,9 +83,9 @@ VarArray	 ->(LARRAY (NUMBER|IDENTIFIER) RARRAY)*;
 //Function? is exluded from LocalDecl
 LocalDecl -> DATATYPE POINTER? IDENTIFIER Array? DecAssignment?(COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL;
 Assignment	 -> IDENTIFIER EQUALS Expr SEMICOL;
-DecAssignment	 -> EQUALS (Expr|Char);
+DecAssignment	 -> EQUALS (Expr|LBRACE Char RBRACE);
 Expr 		 -> Atom (ARTOPERATOR Atom)*;
-Char		 -> QUOT (CHARIDENT|CHARIDENT2) QUOT;
+Char		 -> QUOT CHARVALUE QUOT;
 Atom 		 -> NUMBER | ((POINTER|REFOPER)? IDENTIFIER VarArray?) | LPAREN Expr RPAREN;
 
 Function 	 -> LPAREN (Parameters|VOID)? RPAREN (SEMICOL|CodeBlock);
