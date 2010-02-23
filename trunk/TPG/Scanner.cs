@@ -85,21 +85,33 @@ namespace tccdotnet
             Patterns.Add(TokenType.RETURN, regex);
             Tokens.Add(TokenType.RETURN);
 
-            regex = new Regex(@"scanf", RegexOptions.Compiled);
-            Patterns.Add(TokenType.SCANF, regex);
-            Tokens.Add(TokenType.SCANF);
-
             regex = new Regex(@"printf", RegexOptions.Compiled);
             Patterns.Add(TokenType.PRINTF, regex);
             Tokens.Add(TokenType.PRINTF);
+
+            regex = new Regex(@"scanf", RegexOptions.Compiled);
+            Patterns.Add(TokenType.SCANF, regex);
+            Tokens.Add(TokenType.SCANF);
 
             regex = new Regex(@"do", RegexOptions.Compiled);
             Patterns.Add(TokenType.DO, regex);
             Tokens.Add(TokenType.DO);
 
+            regex = new Regex(@"getch", RegexOptions.Compiled);
+            Patterns.Add(TokenType.GETCH, regex);
+            Tokens.Add(TokenType.GETCH);
+
+            regex = new Regex(@"clrscr", RegexOptions.Compiled);
+            Patterns.Add(TokenType.CLRSCR, regex);
+            Tokens.Add(TokenType.CLRSCR);
+
             regex = new Regex(@"break", RegexOptions.Compiled);
             Patterns.Add(TokenType.BREAK, regex);
             Tokens.Add(TokenType.BREAK);
+
+            regex = new Regex(@"\*", RegexOptions.Compiled);
+            Patterns.Add(TokenType.POINTER, regex);
+            Tokens.Add(TokenType.POINTER);
 
             regex = new Regex(@"@?\""%[dfsc]\""", RegexOptions.Compiled);
             Patterns.Add(TokenType.TYPESPEC, regex);
@@ -113,21 +125,13 @@ namespace tccdotnet
             Patterns.Add(TokenType.IDENTIFIER, regex);
             Tokens.Add(TokenType.IDENTIFIER);
 
-            regex = new Regex(@"([a-zA-Z_]|[0-9_])", RegexOptions.Compiled);
-            Patterns.Add(TokenType.CHARIDENT, regex);
-            Tokens.Add(TokenType.CHARIDENT);
-
-            regex = new Regex(@"([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_])", RegexOptions.Compiled);
-            Patterns.Add(TokenType.CHARIDENT2, regex);
-            Tokens.Add(TokenType.CHARIDENT2);
+            regex = new Regex(@"(([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_]))|([a-zA-Z_]|[0-9_])", RegexOptions.Compiled);
+            Patterns.Add(TokenType.CHARVALUE, regex);
+            Tokens.Add(TokenType.CHARVALUE);
 
             regex = new Regex(@"\+|-|%|/|\*", RegexOptions.Compiled);
             Patterns.Add(TokenType.ARTOPERATOR, regex);
             Tokens.Add(TokenType.ARTOPERATOR);
-
-            regex = new Regex(@"[a-zA-Z_]*", RegexOptions.Compiled);
-            Patterns.Add(TokenType.CASECHAR, regex);
-            Tokens.Add(TokenType.CASECHAR);
 
             regex = new Regex(@"[0-9]+", RegexOptions.Compiled);
             Patterns.Add(TokenType.NUMBER, regex);
@@ -140,10 +144,6 @@ namespace tccdotnet
             regex = new Regex(@"\""", RegexOptions.Compiled);
             Patterns.Add(TokenType.DQUOT, regex);
             Tokens.Add(TokenType.DQUOT);
-
-            regex = new Regex(@"\*", RegexOptions.Compiled);
-            Patterns.Add(TokenType.POINTER, regex);
-            Tokens.Add(TokenType.POINTER);
 
             regex = new Regex(@",", RegexOptions.Compiled);
             Patterns.Add(TokenType.COMMA, regex);
@@ -201,9 +201,9 @@ namespace tccdotnet
             Patterns.Add(TokenType.LOGOP, regex);
             Tokens.Add(TokenType.LOGOP);
 
-            regex = new Regex(@"\+\+|--", RegexOptions.Compiled);
-            Patterns.Add(TokenType.INCRE, regex);
-            Tokens.Add(TokenType.INCRE);
+            regex = new Regex(@"\+\+|\-\-", RegexOptions.Compiled);
+            Patterns.Add(TokenType.INCREDECRE, regex);
+            Tokens.Add(TokenType.INCREDECRE);
 
             regex = new Regex(@"true|false", RegexOptions.Compiled);
             Patterns.Add(TokenType.BOOL, regex);
@@ -378,84 +378,89 @@ namespace tccdotnet
             Expr    = 12,
             Char    = 13,
             Atom    = 14,
-            Function= 15,
-            Parameters= 16,
-            ParArray= 17,
-            CodeBlock= 18,
-            Break   = 19,
-            Switch  = 20,
-            SwitchCase= 21,
-            CaseComp= 22,
-            Statement= 23,
-            If      = 24,
-            Condition= 25,
-            CondLogExpr= 26,
-            CondExpr= 27,
-            Else    = 28,
-            IfForLoopBlock= 29,
-            For     = 30,
-            ForDeclaration= 31,
-            ForAssignment= 32,
-            Increment= 33,
-            While   = 34,
-            DoWhile = 35,
-            WhileLoopBlock= 36,
-            Printf  = 37,
-            Scanf   = 38,
-            Return  = 39,
+            Identifier= 15,
+            ParPass = 16,
+            Function= 17,
+            Parameters= 18,
+            ParArray= 19,
+            CodeBlock= 20,
+            Break   = 21,
+            Switch  = 22,
+            SwitchCase= 23,
+            CaseComp= 24,
+            Statement= 25,
+            If      = 26,
+            Condition= 27,
+            CondLogExpr= 28,
+            CondExpr= 29,
+            Else    = 30,
+            IfForLoopBlock= 31,
+            For     = 32,
+            ForDeclaration= 33,
+            ForAssignment= 34,
+            While   = 35,
+            DoWhile = 36,
+            IncDec  = 37,
+            WhileLoopBlock= 38,
+            Printf  = 39,
+            Scanf   = 40,
+            Return  = 41,
+            GetchOrClrscr= 42,
+            Getch   = 43,
+            Clrscr  = 44,
 
             //Terminal tokens:
-            DIRECTIVE= 40,
-            DATATYPE= 41,
-            INCLUDE = 42,
-            VOID    = 43,
-            SWITCH  = 44,
-            CASE    = 45,
-            IF      = 46,
-            ELSE    = 47,
-            FOR     = 48,
-            WHILE   = 49,
-            DEFAULT = 50,
-            RETURN  = 51,
-            SCANF   = 52,
-            PRINTF  = 53,
-            DO      = 54,
-            BREAK   = 55,
-            TYPESPEC= 56,
-            REFOPER = 57,
-            IDENTIFIER= 58,
-            CHARIDENT= 59,
-            CHARIDENT2= 60,
-            ARTOPERATOR= 61,
-            CASECHAR= 62,
-            NUMBER  = 63,
-            QUOT    = 64,
-            DQUOT   = 65,
-            POINTER = 66,
-            COMMA   = 67,
-            EQUALS  = 68,
-            SEMICOL = 69,
-            COLON   = 70,
-            SHARP   = 71,
-            EOF     = 72,
-            LPAREN  = 73,
-            RPAREN  = 74,
-            LBRACE  = 75,
-            RBRACE  = 76,
-            LARRAY  = 77,
-            RARRAY  = 78,
-            RELOP   = 79,
-            LOGOP   = 80,
-            INCRE   = 81,
-            BOOL    = 82,
-            NOT     = 83,
-            NULL    = 84,
-            STRING  = 85,
-            VARIABLEPARAMS= 86,
-            WHITESPACE= 87,
-            EOL     = 88,
-            COMMENTLINE= 89,
-            COMMENTBLOCK= 90
+            DIRECTIVE= 45,
+            DATATYPE= 46,
+            INCLUDE = 47,
+            VOID    = 48,
+            SWITCH  = 49,
+            CASE    = 50,
+            IF      = 51,
+            ELSE    = 52,
+            FOR     = 53,
+            WHILE   = 54,
+            DEFAULT = 55,
+            RETURN  = 56,
+            PRINTF  = 57,
+            SCANF   = 58,
+            DO      = 59,
+            GETCH   = 60,
+            CLRSCR  = 61,
+            BREAK   = 62,
+            POINTER = 63,
+            TYPESPEC= 64,
+            REFOPER = 65,
+            IDENTIFIER= 66,
+            CHARVALUE= 67,
+            ARTOPERATOR= 68,
+            NUMBER  = 69,
+            QUOT    = 70,
+            DQUOT   = 71,
+            COMMA   = 72,
+            EQUALS  = 73,
+            SEMICOL = 74,
+            COLON   = 75,
+            SHARP   = 76,
+            EOF     = 77,
+            LPAREN  = 78,
+            RPAREN  = 79,
+            LBRACE  = 80,
+            RBRACE  = 81,
+            LARRAY  = 82,
+            RARRAY  = 83,
+            RELOP   = 84,
+            LOGOP   = 85,
+            INCREDECRE= 86,
+            BOOL    = 87,
+            NOT     = 88,
+            NULL    = 89,
+            STRING  = 90,
+            VARIABLEPARAMS= 91,
+            WHITESPACE= 92,
+            EOL     = 93,
+            COMMENTLINE= 94,
+            COMMENTBLOCK= 95
     }
 
     public class Token

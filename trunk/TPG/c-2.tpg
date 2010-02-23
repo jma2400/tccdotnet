@@ -11,21 +11,21 @@ FOR		-> @"for";
 WHILE		-> @"while";
 DEFAULT	-> @"default";
 RETURN		-> @"return";
-SCANF		-> @"scanf";
 PRINTF		-> @"printf";
+SCANF		-> @"scanf";
 DO		-> @"do";
+GETCH		 -> @"getch"; 
+CLRSCR		 -> @"clrscr";
 BREAK         -> @"break";
+POINTER	-> @"\*";
 TYPESPEC	-> @"@?\""%[dfsc]\""";
 REFOPER	-> @"&";
 IDENTIFIER   	-> @"[a-zA-Z_][a-zA-Z0-9_]*";
-CHARVALUE	-> @"([a-zA-Z_]|[0-9_])";
-//CHARVALUE2    -> @"([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_])";
+CHARVALUE	-> @"(([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_]))|([a-zA-Z_]|[0-9_])";
 ARTOPERATOR	-> @"\+|-|%|/|\*";
-CASECHAR	-> @"[a-zA-Z_]*";
 NUMBER		-> @"[0-9]+";
 QUOT		-> @"\'";
 DQUOT		-> @"\""";
-POINTER	-> @"\*";
 COMMA		-> @",";
 EQUALS		-> @"=";
 SEMICOL	-> @";";
@@ -40,7 +40,7 @@ LARRAY		-> @"\[";
 RARRAY		-> @"\]";
 RELOP	       -> @">=|<=|==|!=|>|<";
 LOGOP		-> @"&&|\|\|";
-INCRE		-> @"\+\+|--";
+INCREDECRE	-> @"\+\+|\-\-";
 BOOL		-> @"true|false";
 NOT		-> @"!";
 NULL		-> @"";
@@ -58,8 +58,7 @@ COMMENTLINE  	-> @"//[^\n]*\n?";
 COMMENTBLOCK 	-> @"/\*[^*]*\*+(?:[^/*][^*]*\*+)*/";
 
 /* === C-language CFG === */
-
-Start 		 -> Header* GlobalDecl* EOF;
+Start 		 -> (GetchOrClrscr*)? Header* (GetchOrClrscr*)? GlobalDecl* EOF;
 
 /* Pre-processor directives */
 Header 	 -> SHARP INCLUDE DIRECTIVE;
@@ -69,25 +68,27 @@ Header 	 -> SHARP INCLUDE DIRECTIVE;
  * -- Types: Variable, function, and function prototype declaration
  */
 
-GlobalDecl 	 -> (DATATYPE|VOID) POINTER? IDENTIFIER (Function? 
-				| (Array|DecAssignment)? (COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL);
+GlobalDecl 	 -> (DATATYPE|VOID)? POINTER? IDENTIFIER (Function? 
+		             | (Array|DecAssignment)? (COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL) (GetchOrClrscr*)?;
 
 //Array Declaration
 Array		 -> (LARRAY NUMBER RARRAY)+ ArAssignment?;	
-ArAssignment	 -> EQUALS ArContent;
-ArContent	 -> LBRACE STRING (COMMA STRING)* RBRACE;
+ArAssignment	 -> EQUALS LBRACE ArContent RBRACE;
+ArContent	 -> (STRING|Char) (COMMA (STRING|Char))*;
 
 //Calling Variable Array
 VarArray	 ->(LARRAY (NUMBER|IDENTIFIER) RARRAY)*;
 
 //Function? is exluded from LocalDecl
-LocalDecl -> DATATYPE POINTER? IDENTIFIER Array? DecAssignment?(COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL;
-Assignment	 -> IDENTIFIER EQUALS Expr SEMICOL;
+LocalDecl 	 -> DATATYPE POINTER? IDENTIFIER Array? DecAssignment?(COMMA POINTER? IDENTIFIER Array? DecAssignment?)* SEMICOL;
+Assignment	 -> Identifier (EQUALS Expr)? SEMICOL;
 DecAssignment	 -> EQUALS (Expr|LBRACE Char RBRACE);
 Expr 		 -> Atom (ARTOPERATOR Atom)*;
 Char		 -> QUOT CHARVALUE QUOT;
 Atom 		 -> NUMBER | ((POINTER|REFOPER)? IDENTIFIER VarArray?) | LPAREN Expr RPAREN;
 
+Identifier     -> INCREDECRE? IDENTIFIER INCREDECRE? (LPAREN ParPass RPAREN)?;  
+ParPass	 -> REFOPER? IDENTIFIER (COMMA REFOPER? IDENTIFIER)*;
 Function 	 -> LPAREN (Parameters|VOID) RPAREN (SEMICOL|CodeBlock);
 Parameters 	 -> ((DATATYPE POINTER? IDENTIFIER ParArray?)(COMMA ((DATATYPE POINTER? IDENTIFIER ParArray?)|VARIABLEPARAMS))*)?;
 ParArray	 -> (LARRAY NUMBER RARRAY)*;
@@ -96,10 +97,12 @@ Break		 -> BREAK SEMICOL;
 
 Switch		 -> SWITCH LPAREN IDENTIFIER VarArray? RPAREN LBRACE SwitchCase RBRACE;
 SwitchCase	 -> ((CASE CaseComp COLON)* (DEFAULT COLON)? Statement?)* Statement*;
-CaseComp	 -> NUMBER|Char;
-Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|LocalDecl|Assignment|Break;
+CaseComp	 -> NUMBER|Char|STRING;
+
+Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|LocalDecl|Assignment|Break|GetchOrClrscr;
 
 If		 -> IF LPAREN (Condition) RPAREN IfForLoopBlock Else?;
+
 //Condition	 -> BOOL|(IDENTIFIER RELOP (IDENTIFIER|NUMBER)) (LOGOP Condition)?;
 
 Condition 	-> BOOL | (CondLogExpr (LOGOP CondLogExpr)*);
@@ -107,25 +110,35 @@ CondLogExpr 	-> CondExpr (RELOP CondExpr)*;
 CondExpr	-> (IDENTIFIER VarArray?|NUMBER|STRING) | NOT? LPAREN Condition RPAREN;
 
 //Condition	 -> BOOL|(IDENTIFIER RELOP (IDENTIFIER|NUMBER)) (LOGOP Condition)?;
+
 Else	 	 -> ELSE IfForLoopBlock;
-
 IfForLoopBlock -> (LBRACE Statement* RBRACE)|Statement;
+For		 -> FOR LPAREN (ForDeclaration|ForAssignment(COMMA ForAssignment)*)? SEMICOL 
+		    (Condition (COMMA Condition)*)? SEMICOL 
+		    (IncDec (COMMA IncDec)*)? RPAREN IfForLoopBlock;
 
-For		 -> FOR LPAREN (ForDeclaration|ForAssignment)? SEMICOL Condition? SEMICOL Increment? RPAREN IfForLoopBlock;
 //ForDeclaration and ForAssignment has no SEMICOL at the end
 ForDeclaration -> DATATYPE IDENTIFIER DecAssignment?(COMMA IDENTIFIER DecAssignment?)*;
 ForAssignment	 -> IDENTIFIER EQUALS Expr;
-Increment	 -> IDENTIFIER INCRE;
 
-While		 -> WHILE LPAREN (Condition) RPAREN WhileLoopBlock;
+While		 -> WHILE LPAREN (Condition (COMMA Condition)*) RPAREN WhileLoopBlock;
+DoWhile	 -> DO WhileLoopBlock WHILE LPAREN (Condition (COMMA Condition)*) RPAREN SEMICOL;
 
-DoWhile	 -> DO WhileLoopBlock WHILE LPAREN Condition RPAREN SEMICOL;
+//Prefix and Postfix
+IncDec		 -> INCREDECRE? IDENTIFIER INCREDECRE?;
 
 //WhileLoopBlock enforces the use of { and } as compared to IfForLoopBlock
 WhileLoopBlock -> LBRACE Statement* RBRACE;
-
 Printf 	 -> PRINTF LPAREN STRING (COMMA (IDENTIFIER VarArray?|NUMBER))* RPAREN SEMICOL;
-
 Scanf		 -> SCANF LPAREN TYPESPEC COMMA REFOPER IDENTIFIER RPAREN SEMICOL;
-
 Return		 -> RETURN Expr SEMICOL;
+
+//getch(); and clrscr();
+GetchOrClrscr -> (Getch|Clrscr);
+Getch 		-> GETCH LPAREN RPAREN SEMICOL;
+Clrscr  	-> CLRSCR LPAREN RPAREN SEMICOL;
+
+
+
+
+

@@ -193,6 +193,12 @@ namespace tccdotnet
                 case TokenType.Atom:
                     Value = EvalAtom(tree, paramlist);
                     break;
+                case TokenType.Identifier:
+                    Value = EvalIdentifier(tree, paramlist);
+                    break;
+                case TokenType.ParPass:
+                    Value = EvalParPass(tree, paramlist);
+                    break;
                 case TokenType.Function:
                     Value = EvalFunction(tree, paramlist);
                     break;
@@ -247,14 +253,14 @@ namespace tccdotnet
                 case TokenType.ForAssignment:
                     Value = EvalForAssignment(tree, paramlist);
                     break;
-                case TokenType.Increment:
-                    Value = EvalIncrement(tree, paramlist);
-                    break;
                 case TokenType.While:
                     Value = EvalWhile(tree, paramlist);
                     break;
                 case TokenType.DoWhile:
                     Value = EvalDoWhile(tree, paramlist);
+                    break;
+                case TokenType.IncDec:
+                    Value = EvalIncDec(tree, paramlist);
                     break;
                 case TokenType.WhileLoopBlock:
                     Value = EvalWhileLoopBlock(tree, paramlist);
@@ -267,6 +273,15 @@ namespace tccdotnet
                     break;
                 case TokenType.Return:
                     Value = EvalReturn(tree, paramlist);
+                    break;
+                case TokenType.GetchOrClrscr:
+                    Value = EvalGetchOrClrscr(tree, paramlist);
+                    break;
+                case TokenType.Getch:
+                    Value = EvalGetch(tree, paramlist);
+                    break;
+                case TokenType.Clrscr:
+                    Value = EvalClrscr(tree, paramlist);
                     break;
 
                 default:
@@ -337,6 +352,16 @@ namespace tccdotnet
         }
 
         protected virtual object EvalAtom(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalIdentifier(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalParPass(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }
@@ -431,17 +456,17 @@ namespace tccdotnet
             throw new NotImplementedException();
         }
 
-        protected virtual object EvalIncrement(ParseTree tree, params object[] paramlist)
-        {
-            throw new NotImplementedException();
-        }
-
         protected virtual object EvalWhile(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }
 
         protected virtual object EvalDoWhile(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalIncDec(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }
@@ -462,6 +487,21 @@ namespace tccdotnet
         }
 
         protected virtual object EvalReturn(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalGetchOrClrscr(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalGetch(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalClrscr(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }
