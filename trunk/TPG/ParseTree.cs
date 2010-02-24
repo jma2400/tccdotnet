@@ -163,14 +163,20 @@ namespace tccdotnet
                 case TokenType.GlobalDecl:
                     Value = EvalGlobalDecl(tree, paramlist);
                     break;
+                case TokenType.Pointer:
+                    Value = EvalPointer(tree, paramlist);
+                    break;
+                case TokenType.ArithmeticOperator:
+                    Value = EvalArithmeticOperator(tree, paramlist);
+                    break;
                 case TokenType.Array:
                     Value = EvalArray(tree, paramlist);
                     break;
-                case TokenType.ArAssignment:
-                    Value = EvalArAssignment(tree, paramlist);
+                case TokenType.ArrAssignment:
+                    Value = EvalArrAssignment(tree, paramlist);
                     break;
-                case TokenType.ArContent:
-                    Value = EvalArContent(tree, paramlist);
+                case TokenType.ArrContent:
+                    Value = EvalArrContent(tree, paramlist);
                     break;
                 case TokenType.VarArray:
                     Value = EvalVarArray(tree, paramlist);
@@ -306,17 +312,27 @@ namespace tccdotnet
             throw new NotImplementedException();
         }
 
+        protected virtual object EvalPointer(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual object EvalArithmeticOperator(ParseTree tree, params object[] paramlist)
+        {
+            throw new NotImplementedException();
+        }
+
         protected virtual object EvalArray(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }
 
-        protected virtual object EvalArAssignment(ParseTree tree, params object[] paramlist)
+        protected virtual object EvalArrAssignment(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }
 
-        protected virtual object EvalArContent(ParseTree tree, params object[] paramlist)
+        protected virtual object EvalArrContent(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }
