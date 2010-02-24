@@ -280,8 +280,8 @@ namespace tccdotnet
                 case TokenType.Return:
                     Value = EvalReturn(tree, paramlist);
                     break;
-                case TokenType.GetchOrClrscr:
-                    Value = EvalGetchOrClrscr(tree, paramlist);
+                case TokenType.BuiltInFunc:
+                    Value = EvalBuiltInFunc(tree, paramlist);
                     break;
                 case TokenType.Getch:
                     Value = EvalGetch(tree, paramlist);
@@ -507,7 +507,7 @@ namespace tccdotnet
             throw new NotImplementedException();
         }
 
-        protected virtual object EvalGetchOrClrscr(ParseTree tree, params object[] paramlist)
+        protected virtual object EvalBuiltInFunc(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }
