@@ -43,16 +43,20 @@ namespace tccdotnet
 
 
             
-            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             if (tok.Type == TokenType.GETCH
-                || tok.Type == TokenType.CLRSCR)
+                || tok.Type == TokenType.CLRSCR
+                || tok.Type == TokenType.SCANF
+                || tok.Type == TokenType.PRINTF)
             {
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                 while (tok.Type == TokenType.GETCH
-                    || tok.Type == TokenType.CLRSCR)
+                    || tok.Type == TokenType.CLRSCR
+                    || tok.Type == TokenType.SCANF
+                    || tok.Type == TokenType.PRINTF)
                 {
                     ParseBuiltInFunc(node);
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                 }
             }
 
@@ -65,16 +69,20 @@ namespace tccdotnet
             }
 
             
-            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             if (tok.Type == TokenType.GETCH
-                || tok.Type == TokenType.CLRSCR)
+                || tok.Type == TokenType.CLRSCR
+                || tok.Type == TokenType.SCANF
+                || tok.Type == TokenType.PRINTF)
             {
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                 while (tok.Type == TokenType.GETCH
-                    || tok.Type == TokenType.CLRSCR)
+                    || tok.Type == TokenType.CLRSCR
+                    || tok.Type == TokenType.SCANF
+                    || tok.Type == TokenType.PRINTF)
                 {
                     ParseBuiltInFunc(node);
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                 }
             }
 
@@ -90,16 +98,20 @@ namespace tccdotnet
             }
 
             
-            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             if (tok.Type == TokenType.GETCH
-                || tok.Type == TokenType.CLRSCR)
+                || tok.Type == TokenType.CLRSCR
+                || tok.Type == TokenType.SCANF
+                || tok.Type == TokenType.PRINTF)
             {
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                 while (tok.Type == TokenType.GETCH
-                    || tok.Type == TokenType.CLRSCR)
+                    || tok.Type == TokenType.CLRSCR
+                    || tok.Type == TokenType.SCANF
+                    || tok.Type == TokenType.PRINTF)
                 {
                     ParseBuiltInFunc(node);
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                 }
             }
 
@@ -1319,10 +1331,8 @@ namespace tccdotnet
                     node.Nodes.Add(n);
 
                     
-                    tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+                    tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                     while (tok.Type == TokenType.RETURN
-                        || tok.Type == TokenType.SCANF
-                        || tok.Type == TokenType.PRINTF
                         || tok.Type == TokenType.SWITCH
                         || tok.Type == TokenType.IF
                         || tok.Type == TokenType.FOR
@@ -1333,10 +1343,12 @@ namespace tccdotnet
                         || tok.Type == TokenType.IDENTIFIER
                         || tok.Type == TokenType.BREAK
                         || tok.Type == TokenType.GETCH
-                        || tok.Type == TokenType.CLRSCR)
+                        || tok.Type == TokenType.CLRSCR
+                        || tok.Type == TokenType.SCANF
+                        || tok.Type == TokenType.PRINTF)
                     {
                         ParseStatement(node);
-                    tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+                    tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                     }
 
                     
@@ -1460,12 +1472,10 @@ namespace tccdotnet
 
 
             
-            tok = scanner.LookAhead(TokenType.CASE, TokenType.DEFAULT, TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.CASE, TokenType.DEFAULT, TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             while (tok.Type == TokenType.CASE
                 || tok.Type == TokenType.DEFAULT
                 || tok.Type == TokenType.RETURN
-                || tok.Type == TokenType.SCANF
-                || tok.Type == TokenType.PRINTF
                 || tok.Type == TokenType.SWITCH
                 || tok.Type == TokenType.IF
                 || tok.Type == TokenType.FOR
@@ -1476,7 +1486,9 @@ namespace tccdotnet
                 || tok.Type == TokenType.IDENTIFIER
                 || tok.Type == TokenType.BREAK
                 || tok.Type == TokenType.GETCH
-                || tok.Type == TokenType.CLRSCR)
+                || tok.Type == TokenType.CLRSCR
+                || tok.Type == TokenType.SCANF
+                || tok.Type == TokenType.PRINTF)
             {
 
                 
@@ -1528,10 +1540,8 @@ namespace tccdotnet
                 }
 
                 
-                tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+                tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                 if (tok.Type == TokenType.RETURN
-                    || tok.Type == TokenType.SCANF
-                    || tok.Type == TokenType.PRINTF
                     || tok.Type == TokenType.SWITCH
                     || tok.Type == TokenType.IF
                     || tok.Type == TokenType.FOR
@@ -1542,18 +1552,18 @@ namespace tccdotnet
                     || tok.Type == TokenType.IDENTIFIER
                     || tok.Type == TokenType.BREAK
                     || tok.Type == TokenType.GETCH
-                    || tok.Type == TokenType.CLRSCR)
+                    || tok.Type == TokenType.CLRSCR
+                    || tok.Type == TokenType.SCANF
+                    || tok.Type == TokenType.PRINTF)
                 {
                     ParseStatement(node);
                 }
-            tok = scanner.LookAhead(TokenType.CASE, TokenType.DEFAULT, TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.CASE, TokenType.DEFAULT, TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             }
 
             
-            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             while (tok.Type == TokenType.RETURN
-                || tok.Type == TokenType.SCANF
-                || tok.Type == TokenType.PRINTF
                 || tok.Type == TokenType.SWITCH
                 || tok.Type == TokenType.IF
                 || tok.Type == TokenType.FOR
@@ -1564,10 +1574,12 @@ namespace tccdotnet
                 || tok.Type == TokenType.IDENTIFIER
                 || tok.Type == TokenType.BREAK
                 || tok.Type == TokenType.GETCH
-                || tok.Type == TokenType.CLRSCR)
+                || tok.Type == TokenType.CLRSCR
+                || tok.Type == TokenType.SCANF
+                || tok.Type == TokenType.PRINTF)
             {
                 ParseStatement(node);
-            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             }
 
             parent.Token.UpdateRange(node.Token);
@@ -1617,17 +1629,11 @@ namespace tccdotnet
             ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.Statement), "Statement");
             parent.Nodes.Add(node);
 
-            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             switch (tok.Type)
             {
                 case TokenType.RETURN:
                     ParseReturn(node);
-                    break;
-                case TokenType.SCANF:
-                    ParseScanf(node);
-                    break;
-                case TokenType.PRINTF:
-                    ParsePrintf(node);
                     break;
                 case TokenType.SWITCH:
                     ParseSwitch(node);
@@ -1656,6 +1662,8 @@ namespace tccdotnet
                     break;
                 case TokenType.GETCH:
                 case TokenType.CLRSCR:
+                case TokenType.SCANF:
+                case TokenType.PRINTF:
                     ParseBuiltInFunc(node);
                     break;
                 default:
@@ -1924,7 +1932,7 @@ namespace tccdotnet
             ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.IfForLoopBlock), "IfForLoopBlock");
             parent.Nodes.Add(node);
 
-            tok = scanner.LookAhead(TokenType.LBRACE, TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.LBRACE, TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             switch (tok.Type)
             {
                 case TokenType.LBRACE:
@@ -1938,10 +1946,8 @@ namespace tccdotnet
                     node.Nodes.Add(n);
 
                     
-                    tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+                    tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                     while (tok.Type == TokenType.RETURN
-                        || tok.Type == TokenType.SCANF
-                        || tok.Type == TokenType.PRINTF
                         || tok.Type == TokenType.SWITCH
                         || tok.Type == TokenType.IF
                         || tok.Type == TokenType.FOR
@@ -1952,10 +1958,12 @@ namespace tccdotnet
                         || tok.Type == TokenType.IDENTIFIER
                         || tok.Type == TokenType.BREAK
                         || tok.Type == TokenType.GETCH
-                        || tok.Type == TokenType.CLRSCR)
+                        || tok.Type == TokenType.CLRSCR
+                        || tok.Type == TokenType.SCANF
+                        || tok.Type == TokenType.PRINTF)
                     {
                         ParseStatement(node);
-                    tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+                    tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
                     }
 
                     
@@ -1967,8 +1975,6 @@ namespace tccdotnet
                     node.Nodes.Add(n);
                     break;
                 case TokenType.RETURN:
-                case TokenType.SCANF:
-                case TokenType.PRINTF:
                 case TokenType.SWITCH:
                 case TokenType.IF:
                 case TokenType.FOR:
@@ -1980,6 +1986,8 @@ namespace tccdotnet
                 case TokenType.BREAK:
                 case TokenType.GETCH:
                 case TokenType.CLRSCR:
+                case TokenType.SCANF:
+                case TokenType.PRINTF:
                     ParseStatement(node);
                     break;
                 default:
@@ -2436,10 +2444,8 @@ namespace tccdotnet
             node.Nodes.Add(n);
 
             
-            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             while (tok.Type == TokenType.RETURN
-                || tok.Type == TokenType.SCANF
-                || tok.Type == TokenType.PRINTF
                 || tok.Type == TokenType.SWITCH
                 || tok.Type == TokenType.IF
                 || tok.Type == TokenType.FOR
@@ -2450,10 +2456,12 @@ namespace tccdotnet
                 || tok.Type == TokenType.IDENTIFIER
                 || tok.Type == TokenType.BREAK
                 || tok.Type == TokenType.GETCH
-                || tok.Type == TokenType.CLRSCR)
+                || tok.Type == TokenType.CLRSCR
+                || tok.Type == TokenType.SCANF
+                || tok.Type == TokenType.PRINTF)
             {
                 ParseStatement(node);
-            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SCANF, TokenType.PRINTF, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.RETURN, TokenType.SWITCH, TokenType.IF, TokenType.FOR, TokenType.WHILE, TokenType.DO, TokenType.DATATYPE, TokenType.INCREDECRE, TokenType.IDENTIFIER, TokenType.BREAK, TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             }
 
             
@@ -2679,7 +2687,7 @@ namespace tccdotnet
             ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.BuiltInFunc), "BuiltInFunc");
             parent.Nodes.Add(node);
 
-            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR);
+            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
             switch (tok.Type)
             {
                 case TokenType.GETCH:
@@ -2687,6 +2695,12 @@ namespace tccdotnet
                     break;
                 case TokenType.CLRSCR:
                     ParseClrscr(node);
+                    break;
+                case TokenType.SCANF:
+                    ParseScanf(node);
+                    break;
+                case TokenType.PRINTF:
+                    ParsePrintf(node);
                     break;
                 default:
                     tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found.", 0x0002, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));

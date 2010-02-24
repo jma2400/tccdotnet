@@ -107,7 +107,7 @@ Switch		 -> SWITCH LPAREN IDENTIFIER VarArray? RPAREN LBRACE SwitchCase RBRACE;
 SwitchCase	 -> ((CASE CaseComp COLON)* (DEFAULT COLON)? Statement?)* Statement*;
 CaseComp	 -> NUMBER|Char|STRING;
 
-Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|LocalDecl|Assignment|Break|BuiltInFunc;
+Statement	 -> Return|Switch|If|For|While|DoWhile|LocalDecl|Assignment|Break|BuiltInFunc;
 
 If		 -> IF LPAREN (Condition) RPAREN IfForLoopBlock Else?;
 
@@ -142,7 +142,7 @@ Scanf		 -> SCANF LPAREN TYPESPEC COMMA REFOPER IDENTIFIER RPAREN SEMICOL;
 Return		 -> RETURN Expr SEMICOL;
 
 //getch(); and clrscr();
-BuiltInFunc -> (Getch|Clrscr);
+BuiltInFunc -> (Getch | Clrscr | Scanf | Printf);
 Getch 		-> GETCH LPAREN RPAREN SEMICOL;
 Clrscr  	-> CLRSCR LPAREN RPAREN SEMICOL;
 
