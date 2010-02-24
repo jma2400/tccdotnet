@@ -79,14 +79,14 @@ namespace tccdotnet
             }
 
             
-            tok = scanner.LookAhead(TokenType.DATATYPE, TokenType.VOID, TokenType.POINTER, TokenType.IDENTIFIER);
+            tok = scanner.LookAhead(TokenType.DATATYPE, TokenType.VOID, TokenType.ASTERISK, TokenType.IDENTIFIER);
             while (tok.Type == TokenType.DATATYPE
                 || tok.Type == TokenType.VOID
-                || tok.Type == TokenType.POINTER
+                || tok.Type == TokenType.ASTERISK
                 || tok.Type == TokenType.IDENTIFIER)
             {
                 ParseGlobalDecl(node);
-            tok = scanner.LookAhead(TokenType.DATATYPE, TokenType.VOID, TokenType.POINTER, TokenType.IDENTIFIER);
+            tok = scanner.LookAhead(TokenType.DATATYPE, TokenType.VOID, TokenType.ASTERISK, TokenType.IDENTIFIER);
             }
 
             
@@ -174,15 +174,10 @@ namespace tccdotnet
             }
 
             
-            tok = scanner.LookAhead(TokenType.POINTER);
-            if (tok.Type == TokenType.POINTER)
+            tok = scanner.LookAhead(TokenType.ASTERISK);
+            if (tok.Type == TokenType.ASTERISK)
             {
-                tok = scanner.Scan(TokenType.POINTER);
-                if (tok.Type != TokenType.POINTER)
-                    tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.POINTER.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
-                n = node.CreateNode(tok, tok.ToString() );
-                node.Token.UpdateRange(tok);
-                node.Nodes.Add(n);
+                ParsePointer(node);
             }
 
             
@@ -243,15 +238,10 @@ namespace tccdotnet
                         node.Nodes.Add(n);
 
                         
-                        tok = scanner.LookAhead(TokenType.POINTER);
-                        if (tok.Type == TokenType.POINTER)
+                        tok = scanner.LookAhead(TokenType.ASTERISK);
+                        if (tok.Type == TokenType.ASTERISK)
                         {
-                            tok = scanner.Scan(TokenType.POINTER);
-                            if (tok.Type != TokenType.POINTER)
-                                tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.POINTER.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
-                            n = node.CreateNode(tok, tok.ToString() );
-                            node.Token.UpdateRange(tok);
-                            node.Nodes.Add(n);
+                            ParsePointer(node);
                         }
 
                         
@@ -308,6 +298,84 @@ namespace tccdotnet
             parent.Token.UpdateRange(node.Token);
         }
 
+        private void ParsePointer(ParseNode parent)
+        {
+            Token tok;
+           ParseNode n;
+            ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.Pointer), "Pointer");
+            parent.Nodes.Add(node);
+
+            do {
+                tok = scanner.Scan(TokenType.ASTERISK);
+                if (tok.Type != TokenType.ASTERISK)
+                    tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.ASTERISK.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
+                n = node.CreateNode(tok, tok.ToString() );
+                node.Token.UpdateRange(tok);
+                node.Nodes.Add(n);
+                tok = scanner.LookAhead(TokenType.ASTERISK);
+            } while (tok.Type == TokenType.ASTERISK);
+
+            parent.Token.UpdateRange(node.Token);
+        }
+
+        private void ParseArithmeticOperator(ParseNode parent)
+        {
+            Token tok;
+           ParseNode n;
+            ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.ArithmeticOperator), "ArithmeticOperator");
+            parent.Nodes.Add(node);
+
+            tok = scanner.LookAhead(TokenType.PLUS, TokenType.MINUS, TokenType.ASTERISK, TokenType.FSLASH, TokenType.PERCENT);
+            switch (tok.Type)
+            {
+                case TokenType.PLUS:
+                    tok = scanner.Scan(TokenType.PLUS);
+                    if (tok.Type != TokenType.PLUS)
+                        tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.PLUS.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
+                    n = node.CreateNode(tok, tok.ToString() );
+                    node.Token.UpdateRange(tok);
+                    node.Nodes.Add(n);
+                    break;
+                case TokenType.MINUS:
+                    tok = scanner.Scan(TokenType.MINUS);
+                    if (tok.Type != TokenType.MINUS)
+                        tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.MINUS.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
+                    n = node.CreateNode(tok, tok.ToString() );
+                    node.Token.UpdateRange(tok);
+                    node.Nodes.Add(n);
+                    break;
+                case TokenType.ASTERISK:
+                    tok = scanner.Scan(TokenType.ASTERISK);
+                    if (tok.Type != TokenType.ASTERISK)
+                        tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.ASTERISK.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
+                    n = node.CreateNode(tok, tok.ToString() );
+                    node.Token.UpdateRange(tok);
+                    node.Nodes.Add(n);
+                    break;
+                case TokenType.FSLASH:
+                    tok = scanner.Scan(TokenType.FSLASH);
+                    if (tok.Type != TokenType.FSLASH)
+                        tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.FSLASH.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
+                    n = node.CreateNode(tok, tok.ToString() );
+                    node.Token.UpdateRange(tok);
+                    node.Nodes.Add(n);
+                    break;
+                case TokenType.PERCENT:
+                    tok = scanner.Scan(TokenType.PERCENT);
+                    if (tok.Type != TokenType.PERCENT)
+                        tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.PERCENT.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
+                    n = node.CreateNode(tok, tok.ToString() );
+                    node.Token.UpdateRange(tok);
+                    node.Nodes.Add(n);
+                    break;
+                default:
+                    tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found.", 0x0002, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
+                    break;
+            }
+
+            parent.Token.UpdateRange(node.Token);
+        }
+
         private void ParseArray(ParseNode parent)
         {
             Token tok;
@@ -349,17 +417,17 @@ namespace tccdotnet
             tok = scanner.LookAhead(TokenType.EQUALS);
             if (tok.Type == TokenType.EQUALS)
             {
-                ParseArAssignment(node);
+                ParseArrAssignment(node);
             }
 
             parent.Token.UpdateRange(node.Token);
         }
 
-        private void ParseArAssignment(ParseNode parent)
+        private void ParseArrAssignment(ParseNode parent)
         {
             Token tok;
            ParseNode n;
-            ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.ArAssignment), "ArAssignment");
+            ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.ArrAssignment), "ArrAssignment");
             parent.Nodes.Add(node);
 
 
@@ -380,7 +448,7 @@ namespace tccdotnet
             node.Nodes.Add(n);
 
             
-            ParseArContent(node);
+            ParseArrContent(node);
 
             
             tok = scanner.Scan(TokenType.RBRACE);
@@ -393,11 +461,11 @@ namespace tccdotnet
             parent.Token.UpdateRange(node.Token);
         }
 
-        private void ParseArContent(ParseNode parent)
+        private void ParseArrContent(ParseNode parent)
         {
             Token tok;
            ParseNode n;
-            ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.ArContent), "ArContent");
+            ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.ArrContent), "ArrContent");
             parent.Nodes.Add(node);
 
 
@@ -533,15 +601,10 @@ namespace tccdotnet
             node.Nodes.Add(n);
 
             
-            tok = scanner.LookAhead(TokenType.POINTER);
-            if (tok.Type == TokenType.POINTER)
+            tok = scanner.LookAhead(TokenType.ASTERISK);
+            if (tok.Type == TokenType.ASTERISK)
             {
-                tok = scanner.Scan(TokenType.POINTER);
-                if (tok.Type != TokenType.POINTER)
-                    tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.POINTER.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
-                n = node.CreateNode(tok, tok.ToString() );
-                node.Token.UpdateRange(tok);
-                node.Nodes.Add(n);
+                ParsePointer(node);
             }
 
             
@@ -580,15 +643,10 @@ namespace tccdotnet
                 node.Nodes.Add(n);
 
                 
-                tok = scanner.LookAhead(TokenType.POINTER);
-                if (tok.Type == TokenType.POINTER)
+                tok = scanner.LookAhead(TokenType.ASTERISK);
+                if (tok.Type == TokenType.ASTERISK)
                 {
-                    tok = scanner.Scan(TokenType.POINTER);
-                    if (tok.Type != TokenType.POINTER)
-                        tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.POINTER.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
-                    n = node.CreateNode(tok, tok.ToString() );
-                    node.Token.UpdateRange(tok);
-                    node.Nodes.Add(n);
+                    ParsePointer(node);
                 }
 
                 
@@ -682,11 +740,11 @@ namespace tccdotnet
             node.Nodes.Add(n);
 
             
-            tok = scanner.LookAhead(TokenType.NUMBER, TokenType.POINTER, TokenType.REFOPER, TokenType.IDENTIFIER, TokenType.LPAREN, TokenType.LBRACE);
+            tok = scanner.LookAhead(TokenType.NUMBER, TokenType.ASTERISK, TokenType.REFOPER, TokenType.IDENTIFIER, TokenType.LPAREN, TokenType.LBRACE);
             switch (tok.Type)
             {
                 case TokenType.NUMBER:
-                case TokenType.POINTER:
+                case TokenType.ASTERISK:
                 case TokenType.REFOPER:
                 case TokenType.IDENTIFIER:
                 case TokenType.LPAREN:
@@ -733,21 +791,20 @@ namespace tccdotnet
             ParseAtom(node);
 
             
-            tok = scanner.LookAhead(TokenType.ARTOPERATOR);
-            while (tok.Type == TokenType.ARTOPERATOR)
+            tok = scanner.LookAhead(TokenType.PLUS, TokenType.MINUS, TokenType.ASTERISK, TokenType.FSLASH, TokenType.PERCENT);
+            while (tok.Type == TokenType.PLUS
+                || tok.Type == TokenType.MINUS
+                || tok.Type == TokenType.ASTERISK
+                || tok.Type == TokenType.FSLASH
+                || tok.Type == TokenType.PERCENT)
             {
 
                 
-                tok = scanner.Scan(TokenType.ARTOPERATOR);
-                if (tok.Type != TokenType.ARTOPERATOR)
-                    tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.ARTOPERATOR.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
-                n = node.CreateNode(tok, tok.ToString() );
-                node.Token.UpdateRange(tok);
-                node.Nodes.Add(n);
+                ParseArithmeticOperator(node);
 
                 
                 ParseAtom(node);
-            tok = scanner.LookAhead(TokenType.ARTOPERATOR);
+            tok = scanner.LookAhead(TokenType.PLUS, TokenType.MINUS, TokenType.ASTERISK, TokenType.FSLASH, TokenType.PERCENT);
             }
 
             parent.Token.UpdateRange(node.Token);
@@ -795,7 +852,7 @@ namespace tccdotnet
             ParseNode node = parent.CreateNode(scanner.GetToken(TokenType.Atom), "Atom");
             parent.Nodes.Add(node);
 
-            tok = scanner.LookAhead(TokenType.NUMBER, TokenType.POINTER, TokenType.REFOPER, TokenType.IDENTIFIER, TokenType.LPAREN);
+            tok = scanner.LookAhead(TokenType.NUMBER, TokenType.ASTERISK, TokenType.REFOPER, TokenType.IDENTIFIER, TokenType.LPAREN);
             switch (tok.Type)
             {
                 case TokenType.NUMBER:
@@ -806,25 +863,20 @@ namespace tccdotnet
                     node.Token.UpdateRange(tok);
                     node.Nodes.Add(n);
                     break;
-                case TokenType.POINTER:
+                case TokenType.ASTERISK:
                 case TokenType.REFOPER:
                 case TokenType.IDENTIFIER:
 
                     
-                    tok = scanner.LookAhead(TokenType.POINTER, TokenType.REFOPER);
-                    if (tok.Type == TokenType.POINTER
+                    tok = scanner.LookAhead(TokenType.ASTERISK, TokenType.REFOPER);
+                    if (tok.Type == TokenType.ASTERISK
                         || tok.Type == TokenType.REFOPER)
                     {
-                        tok = scanner.LookAhead(TokenType.POINTER, TokenType.REFOPER);
+                        tok = scanner.LookAhead(TokenType.ASTERISK, TokenType.REFOPER);
                         switch (tok.Type)
                         {
-                            case TokenType.POINTER:
-                                tok = scanner.Scan(TokenType.POINTER);
-                                if (tok.Type != TokenType.POINTER)
-                                    tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.POINTER.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
-                                n = node.CreateNode(tok, tok.ToString() );
-                                node.Token.UpdateRange(tok);
-                                node.Nodes.Add(n);
+                            case TokenType.ASTERISK:
+                                ParsePointer(node);
                                 break;
                             case TokenType.REFOPER:
                                 tok = scanner.Scan(TokenType.REFOPER);
@@ -1108,15 +1160,10 @@ namespace tccdotnet
                 node.Nodes.Add(n);
 
                 
-                tok = scanner.LookAhead(TokenType.POINTER);
-                if (tok.Type == TokenType.POINTER)
+                tok = scanner.LookAhead(TokenType.ASTERISK);
+                if (tok.Type == TokenType.ASTERISK)
                 {
-                    tok = scanner.Scan(TokenType.POINTER);
-                    if (tok.Type != TokenType.POINTER)
-                        tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.POINTER.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
-                    n = node.CreateNode(tok, tok.ToString() );
-                    node.Token.UpdateRange(tok);
-                    node.Nodes.Add(n);
+                    ParsePointer(node);
                 }
 
                 
@@ -1162,15 +1209,10 @@ namespace tccdotnet
                             node.Nodes.Add(n);
 
                             
-                            tok = scanner.LookAhead(TokenType.POINTER);
-                            if (tok.Type == TokenType.POINTER)
+                            tok = scanner.LookAhead(TokenType.ASTERISK);
+                            if (tok.Type == TokenType.ASTERISK)
                             {
-                                tok = scanner.Scan(TokenType.POINTER);
-                                if (tok.Type != TokenType.POINTER)
-                                    tree.Errors.Add(new ParseError("Unexpected token '" + tok.Text.Replace("\n", "") + "' found. Expected " + TokenType.POINTER.ToString(), 0x1001, tok.LinePos, tok.ColumnPos, tok.StartPos, tok.Length));
-                                n = node.CreateNode(tok, tok.ToString() );
-                                node.Token.UpdateRange(tok);
-                                node.Nodes.Add(n);
+                                ParsePointer(node);
                             }
 
                             

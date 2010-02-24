@@ -109,10 +109,6 @@ namespace tccdotnet
             Patterns.Add(TokenType.BREAK, regex);
             Tokens.Add(TokenType.BREAK);
 
-            regex = new Regex(@"\*", RegexOptions.Compiled);
-            Patterns.Add(TokenType.POINTER, regex);
-            Tokens.Add(TokenType.POINTER);
-
             regex = new Regex(@"@?\""%[dfsc]\""", RegexOptions.Compiled);
             Patterns.Add(TokenType.TYPESPEC, regex);
             Tokens.Add(TokenType.TYPESPEC);
@@ -129,9 +125,25 @@ namespace tccdotnet
             Patterns.Add(TokenType.CHARVALUE, regex);
             Tokens.Add(TokenType.CHARVALUE);
 
-            regex = new Regex(@"\+|-|%|/|\*", RegexOptions.Compiled);
-            Patterns.Add(TokenType.ARTOPERATOR, regex);
-            Tokens.Add(TokenType.ARTOPERATOR);
+            regex = new Regex(@"\+", RegexOptions.Compiled);
+            Patterns.Add(TokenType.PLUS, regex);
+            Tokens.Add(TokenType.PLUS);
+
+            regex = new Regex(@"-", RegexOptions.Compiled);
+            Patterns.Add(TokenType.MINUS, regex);
+            Tokens.Add(TokenType.MINUS);
+
+            regex = new Regex(@"\*", RegexOptions.Compiled);
+            Patterns.Add(TokenType.ASTERISK, regex);
+            Tokens.Add(TokenType.ASTERISK);
+
+            regex = new Regex(@"/", RegexOptions.Compiled);
+            Patterns.Add(TokenType.FSLASH, regex);
+            Tokens.Add(TokenType.FSLASH);
+
+            regex = new Regex(@"%", RegexOptions.Compiled);
+            Patterns.Add(TokenType.PERCENT, regex);
+            Tokens.Add(TokenType.PERCENT);
 
             regex = new Regex(@"[0-9]+", RegexOptions.Compiled);
             Patterns.Add(TokenType.NUMBER, regex);
@@ -368,99 +380,104 @@ namespace tccdotnet
             Start   = 2,
             Header  = 3,
             GlobalDecl= 4,
-            Array   = 5,
-            ArAssignment= 6,
-            ArContent= 7,
-            VarArray= 8,
-            LocalDecl= 9,
-            Assignment= 10,
-            DecAssignment= 11,
-            Expr    = 12,
-            Char    = 13,
-            Atom    = 14,
-            Identifier= 15,
-            ParPass = 16,
-            Function= 17,
-            Parameters= 18,
-            ParArray= 19,
-            CodeBlock= 20,
-            Break   = 21,
-            Switch  = 22,
-            SwitchCase= 23,
-            CaseComp= 24,
-            Statement= 25,
-            If      = 26,
-            Condition= 27,
-            CondLogExpr= 28,
-            CondExpr= 29,
-            Else    = 30,
-            IfForLoopBlock= 31,
-            For     = 32,
-            ForDeclaration= 33,
-            ForAssignment= 34,
-            While   = 35,
-            DoWhile = 36,
-            IncDec  = 37,
-            WhileLoopBlock= 38,
-            Printf  = 39,
-            Scanf   = 40,
-            Return  = 41,
-            GetchOrClrscr= 42,
-            Getch   = 43,
-            Clrscr  = 44,
+            Pointer = 5,
+            ArithmeticOperator= 6,
+            Array   = 7,
+            ArrAssignment= 8,
+            ArrContent= 9,
+            VarArray= 10,
+            LocalDecl= 11,
+            Assignment= 12,
+            DecAssignment= 13,
+            Expr    = 14,
+            Char    = 15,
+            Atom    = 16,
+            Identifier= 17,
+            ParPass = 18,
+            Function= 19,
+            Parameters= 20,
+            ParArray= 21,
+            CodeBlock= 22,
+            Break   = 23,
+            Switch  = 24,
+            SwitchCase= 25,
+            CaseComp= 26,
+            Statement= 27,
+            If      = 28,
+            Condition= 29,
+            CondLogExpr= 30,
+            CondExpr= 31,
+            Else    = 32,
+            IfForLoopBlock= 33,
+            For     = 34,
+            ForDeclaration= 35,
+            ForAssignment= 36,
+            While   = 37,
+            DoWhile = 38,
+            IncDec  = 39,
+            WhileLoopBlock= 40,
+            Printf  = 41,
+            Scanf   = 42,
+            Return  = 43,
+            GetchOrClrscr= 44,
+            Getch   = 45,
+            Clrscr  = 46,
 
             //Terminal tokens:
-            DIRECTIVE= 45,
-            DATATYPE= 46,
-            INCLUDE = 47,
-            VOID    = 48,
-            SWITCH  = 49,
-            CASE    = 50,
-            IF      = 51,
-            ELSE    = 52,
-            FOR     = 53,
-            WHILE   = 54,
-            DEFAULT = 55,
-            RETURN  = 56,
-            PRINTF  = 57,
-            SCANF   = 58,
-            DO      = 59,
-            GETCH   = 60,
-            CLRSCR  = 61,
-            BREAK   = 62,
-            POINTER = 63,
-            TYPESPEC= 64,
-            REFOPER = 65,
-            IDENTIFIER= 66,
-            CHARVALUE= 67,
-            ARTOPERATOR= 68,
-            NUMBER  = 69,
-            QUOT    = 70,
-            DQUOT   = 71,
-            COMMA   = 72,
-            EQUALS  = 73,
-            SEMICOL = 74,
-            COLON   = 75,
-            SHARP   = 76,
-            EOF     = 77,
-            LPAREN  = 78,
-            RPAREN  = 79,
-            LBRACE  = 80,
-            RBRACE  = 81,
-            LARRAY  = 82,
-            RARRAY  = 83,
-            RELOP   = 84,
-            LOGOP   = 85,
-            INCREDECRE= 86,
-            BOOL    = 87,
-            NOT     = 88,
-            NULL    = 89,
-            STRING  = 90,
-            VARIABLEPARAMS= 91,
-            WHITESPACE= 92,
-            EOL     = 93,
-            COMMENTLINE= 94,
-            COMMENTBLOCK= 95
+            DIRECTIVE= 47,
+            DATATYPE= 48,
+            INCLUDE = 49,
+            VOID    = 50,
+            SWITCH  = 51,
+            CASE    = 52,
+            IF      = 53,
+            ELSE    = 54,
+            FOR     = 55,
+            WHILE   = 56,
+            DEFAULT = 57,
+            RETURN  = 58,
+            PRINTF  = 59,
+            SCANF   = 60,
+            DO      = 61,
+            GETCH   = 62,
+            CLRSCR  = 63,
+            BREAK   = 64,
+            TYPESPEC= 65,
+            REFOPER = 66,
+            IDENTIFIER= 67,
+            CHARVALUE= 68,
+            PLUS    = 69,
+            MINUS   = 70,
+            ASTERISK= 71,
+            FSLASH  = 72,
+            PERCENT = 73,
+            NUMBER  = 74,
+            QUOT    = 75,
+            DQUOT   = 76,
+            COMMA   = 77,
+            EQUALS  = 78,
+            SEMICOL = 79,
+            COLON   = 80,
+            SHARP   = 81,
+            EOF     = 82,
+            LPAREN  = 83,
+            RPAREN  = 84,
+            LBRACE  = 85,
+            RBRACE  = 86,
+            LARRAY  = 87,
+            RARRAY  = 88,
+            RELOP   = 89,
+            LOGOP   = 90,
+            INCREDECRE= 91,
+            BOOL    = 92,
+            NOT     = 93,
+            NULL    = 94,
+            STRING  = 95,
+            VARIABLEPARAMS= 96,
+            WHITESPACE= 97,
+            EOL     = 98,
+            COMMENTLINE= 99,
+            COMMENTBLOCK= 100
     }
 
     public class Token
