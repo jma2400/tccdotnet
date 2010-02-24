@@ -63,7 +63,7 @@ COMMENTLINE  	-> @"//[^\n]*\n?";
 COMMENTBLOCK 	-> @"/\*[^*]*\*+(?:[^/*][^*]*\*+)*/";
 
 /* === C-language CFG === */
-Start 		 -> (GetchOrClrscr*)? Header* (GetchOrClrscr*)? GlobalDecl* EOF;
+Start 		 -> (BuiltInFunc*)? Header* (BuiltInFunc*)? GlobalDecl* (BuiltInFunc*)? EOF;
 
 /* Pre-processor directives */
 Header 	 -> SHARP INCLUDE DIRECTIVE;
@@ -74,7 +74,7 @@ Header 	 -> SHARP INCLUDE DIRECTIVE;
  */
 
 GlobalDecl 	 -> (DATATYPE|VOID)? Pointer? IDENTIFIER (Function? | 
-								 (Array|DecAssignment)? (COMMA Pointer? IDENTIFIER Array? DecAssignment?)* SEMICOL) (GetchOrClrscr*)?;
+								 (Array|DecAssignment)? (COMMA Pointer? IDENTIFIER Array? DecAssignment?)* SEMICOL);
 
 Pointer	-> ASTERISK+;
 ArithmeticOperator -> PLUS | MINUS | ASTERISK | FSLASH | PERCENT;
@@ -97,8 +97,8 @@ Atom 		 -> NUMBER | ((Pointer|REFOPER)? IDENTIFIER VarArray?) | LPAREN Expr RPAR
 
 Identifier     -> INCREDECRE? IDENTIFIER INCREDECRE? (LPAREN ParPass RPAREN)?;  
 ParPass	 -> REFOPER? IDENTIFIER (COMMA REFOPER? IDENTIFIER)*;
-Function 	 -> LPAREN (Parameters|VOID) RPAREN (SEMICOL|CodeBlock);
-Parameters 	 -> ((DATATYPE Pointer? IDENTIFIER ParArray?)(COMMA ((DATATYPE Pointer? IDENTIFIER ParArray?)|VARIABLEPARAMS))*)?;
+Function 	 -> LPAREN (Parameters|VOID)? RPAREN (SEMICOL|CodeBlock);
+Parameters 	 -> (DATATYPE Pointer? IDENTIFIER ParArray?)(COMMA ((DATATYPE Pointer? IDENTIFIER ParArray?)|VARIABLEPARAMS))*;
 ParArray	 -> (LARRAY NUMBER RARRAY)*;
 CodeBlock	 -> BOOL|(LBRACE Statement* RBRACE);
 Break		 -> BREAK SEMICOL;
@@ -107,7 +107,7 @@ Switch		 -> SWITCH LPAREN IDENTIFIER VarArray? RPAREN LBRACE SwitchCase RBRACE;
 SwitchCase	 -> ((CASE CaseComp COLON)* (DEFAULT COLON)? Statement?)* Statement*;
 CaseComp	 -> NUMBER|Char|STRING;
 
-Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|LocalDecl|Assignment|Break|GetchOrClrscr;
+Statement	 -> Return|Scanf|Printf|Switch|If|For|While|DoWhile|LocalDecl|Assignment|Break|BuiltInFunc;
 
 If		 -> IF LPAREN (Condition) RPAREN IfForLoopBlock Else?;
 
@@ -142,7 +142,7 @@ Scanf		 -> SCANF LPAREN TYPESPEC COMMA REFOPER IDENTIFIER RPAREN SEMICOL;
 Return		 -> RETURN Expr SEMICOL;
 
 //getch(); and clrscr();
-GetchOrClrscr -> (Getch|Clrscr);
+BuiltInFunc -> (Getch|Clrscr);
 Getch 		-> GETCH LPAREN RPAREN SEMICOL;
 Clrscr  	-> CLRSCR LPAREN RPAREN SEMICOL;
 

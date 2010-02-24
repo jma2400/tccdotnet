@@ -419,7 +419,7 @@ namespace tccdotnet
             Printf  = 41,
             Scanf   = 42,
             Return  = 43,
-            GetchOrClrscr= 44,
+            BuiltInFunc= 44,
             Getch   = 45,
             Clrscr  = 46,
 
