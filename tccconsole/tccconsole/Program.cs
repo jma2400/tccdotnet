@@ -12,7 +12,7 @@ namespace tccconsole
         {
 
             ConsoleColor.SetForeGroundColour(ConsoleColor.ForeGroundColour.Green, true);
-            Console.WriteLine("parCer : A Lexer/Parser for C (Aivan Monceller && Patrick Cardenas)");
+            Console.WriteLine("tccconsole: Scanner and Lexical Analyer for C");
             ConsoleColor.SetForeGroundColour();
             Console.Write("Please input filename: ");
             string filename = Console.ReadLine();
@@ -34,7 +34,6 @@ namespace tccconsole
             Scanner scanner = new Scanner();
 
             string input = reader.ReadToEnd();
-
             scanner.Init(input);
             Token tok = new Token();
             do
