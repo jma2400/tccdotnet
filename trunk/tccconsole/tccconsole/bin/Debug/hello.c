@@ -1,6 +1,6 @@
 #include<stdio.h>
-int *a=2;
-
+char *a='2';
+int b=5;
 main()
 {
 	printf("hello world");

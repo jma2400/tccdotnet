@@ -32,10 +32,12 @@ namespace tccconsole
             LookAheadToken = null;
 
             SkipList = new List<TokenType>();
-            SkipList.Add(TokenType.WHITESPACE);
+            
+            //SkipList.Add(TokenType.WHITESPACE);
             SkipList.Add(TokenType.EOL);
-            SkipList.Add(TokenType.COMMENTLINE);
-            SkipList.Add(TokenType.COMMENTBLOCK);
+            //SkipList.Add(TokenType.COMMENTLINE);
+            //SkipList.Add(TokenType.COMMENTBLOCK);
+            
 
             regex = new Regex(@"<.+?>", RegexOptions.Compiled);
             Patterns.Add(TokenType.DIRECTIVE, regex);
@@ -121,7 +123,7 @@ namespace tccconsole
             Patterns.Add(TokenType.IDENTIFIER, regex);
             Tokens.Add(TokenType.IDENTIFIER);
 
-            regex = new Regex(@"(([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_]))|([a-zA-Z_]|[0-9_])", RegexOptions.Compiled);
+            regex = new Regex(@"\'(([a-zA-Z_][a-zA-Z_]|[0-9_][0-9_])|([a-zA-Z_][0-9_])|([0-9_][a-zA-Z_]))\'|\'([a-zA-Z_]|[0-9_])\'", RegexOptions.Compiled);
             Patterns.Add(TokenType.CHARVALUE, regex);
             Tokens.Add(TokenType.CHARVALUE);
 
@@ -309,7 +311,9 @@ namespace tccconsole
 
             // if no scantokens specified, then scan for all of them (= backward compatible)
             if (expectedtokens.Length == 0)
+            {
                 scantokens = Tokens;
+            }
             else
             {
                 scantokens = new List<TokenType>(expectedtokens);
@@ -323,7 +327,8 @@ namespace tccconsole
                 TokenType index = (TokenType)int.MaxValue;
                 string input = Input.Substring(startpos);
                 string count = Input.Substring(0, EndPos);
-                CurrentLine = count.Split('\n').Length;
+                //CurrentLine = count.Split('\n').Length;
+                CurrentLine = Regex.Split(count, "\r\n").Length;
                 int a = count.LastIndexOf(Environment.NewLine);
                 CurrentColumn = EndPos - a;
 
