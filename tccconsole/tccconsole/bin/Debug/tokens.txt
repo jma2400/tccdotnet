@@ -1,24 +1,57 @@
+Token: # 
+ Type: SHARP        Line:   1 
+
+Token: include 
+ Type: INCLUDE      Line:   1 
+
+Token: <stdio.h> 
+ Type: DIRECTIVE    Line:   1 
+
 Token: int 
  Type: DATATYPE     Line:   1 
 
 Token: * 
- Type: ASTERISK     Line:   1 
+ Type: ASTERISK     Line:   2 
 
-Token: x 
- Type: IDENTIFIER   Line:   1 
+Token: a 
+ Type: IDENTIFIER   Line:   2 
 
 Token: = 
- Type: EQUALS       Line:   1 
+ Type: EQUALS       Line:   2 
 
-Token: 5 
- Type: CHARVALUE    Line:   1 
-
-Token: * 
- Type: ASTERISK     Line:   1 
-
-Token: 3 
- Type: CHARVALUE    Line:   1 
+Token: 2 
+ Type: CHARVALUE    Line:   2 
 
 Token: ; 
- Type: SEMICOL      Line:   1 
+ Type: SEMICOL      Line:   2 
+
+Token: main 
+ Type: IDENTIFIER   Line:   2 
+
+Token: ( 
+ Type: LPAREN       Line:   4 
+
+Token: ) 
+ Type: RPAREN       Line:   4 
+
+Token: { 
+ Type: LBRACE       Line:   4 
+
+Token: printf 
+ Type: PRINTF       Line:   5 
+
+Token: ( 
+ Type: LPAREN       Line:   6 
+
+Token: "hello world" 
+ Type: STRING       Line:   6 
+
+Token: ) 
+ Type: RPAREN       Line:   6 
+
+Token: ; 
+ Type: SEMICOL      Line:   6 
+
+Token: } 
+ Type: RBRACE       Line:   6 
 

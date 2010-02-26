@@ -43,47 +43,11 @@ namespace tccdotnet
 
 
             
-            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
-            if (tok.Type == TokenType.GETCH
-                || tok.Type == TokenType.CLRSCR
-                || tok.Type == TokenType.SCANF
-                || tok.Type == TokenType.PRINTF)
-            {
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
-                while (tok.Type == TokenType.GETCH
-                    || tok.Type == TokenType.CLRSCR
-                    || tok.Type == TokenType.SCANF
-                    || tok.Type == TokenType.PRINTF)
-                {
-                    ParseBuiltInFunc(node);
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
-                }
-            }
-
-            
             tok = scanner.LookAhead(TokenType.SHARP);
             while (tok.Type == TokenType.SHARP)
             {
                 ParseHeader(node);
             tok = scanner.LookAhead(TokenType.SHARP);
-            }
-
-            
-            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
-            if (tok.Type == TokenType.GETCH
-                || tok.Type == TokenType.CLRSCR
-                || tok.Type == TokenType.SCANF
-                || tok.Type == TokenType.PRINTF)
-            {
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
-                while (tok.Type == TokenType.GETCH
-                    || tok.Type == TokenType.CLRSCR
-                    || tok.Type == TokenType.SCANF
-                    || tok.Type == TokenType.PRINTF)
-                {
-                    ParseBuiltInFunc(node);
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
-                }
             }
 
             
@@ -95,24 +59,6 @@ namespace tccdotnet
             {
                 ParseGlobalDecl(node);
             tok = scanner.LookAhead(TokenType.DATATYPE, TokenType.VOID, TokenType.ASTERISK, TokenType.IDENTIFIER);
-            }
-
-            
-            tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
-            if (tok.Type == TokenType.GETCH
-                || tok.Type == TokenType.CLRSCR
-                || tok.Type == TokenType.SCANF
-                || tok.Type == TokenType.PRINTF)
-            {
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
-                while (tok.Type == TokenType.GETCH
-                    || tok.Type == TokenType.CLRSCR
-                    || tok.Type == TokenType.SCANF
-                    || tok.Type == TokenType.PRINTF)
-                {
-                    ParseBuiltInFunc(node);
-                tok = scanner.LookAhead(TokenType.GETCH, TokenType.CLRSCR, TokenType.SCANF, TokenType.PRINTF);
-                }
             }
 
             
