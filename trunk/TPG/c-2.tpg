@@ -63,7 +63,8 @@ COMMENTLINE  	-> @"//[^\n]*\n?";
 COMMENTBLOCK 	-> @"/\*[^*]*\*+(?:[^/*][^*]*\*+)*/";
 
 /* === C-language CFG === */
-Start 		 -> (BuiltInFunc*)? Header* (BuiltInFunc*)? GlobalDecl* (BuiltInFunc*)? EOF;
+//Assuming no functions could be called outside functions
+Start 		 -> Header* GlobalDecl* EOF;
 
 /* Pre-processor directives */
 Header 	 -> SHARP INCLUDE DIRECTIVE;
@@ -73,8 +74,7 @@ Header 	 -> SHARP INCLUDE DIRECTIVE;
  * -- Types: Variable, function, and function prototype declaration
  */
 
-GlobalDecl 	 -> (DATATYPE|VOID)? Pointer? IDENTIFIER (Function? | 
-								 (Array|DecAssignment)? (COMMA Pointer? IDENTIFIER Array? DecAssignment?)* SEMICOL);
+GlobalDecl 	 -> (DATATYPE|VOID)? Pointer? IDENTIFIER (Function? | (Array|DecAssignment)? (COMMA Pointer? IDENTIFIER Array? DecAssignment?)* SEMICOL);
 
 Pointer	-> ASTERISK+;
 ArithmeticOperator -> PLUS | MINUS | ASTERISK | FSLASH | PERCENT;

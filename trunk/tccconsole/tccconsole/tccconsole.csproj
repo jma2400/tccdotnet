@@ -66,6 +66,7 @@
     <Compile Include="Scanner.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\hello.c" />
     <Content Include="bin\Debug\input.txt" />
     <Content Include="bin\Debug\tokens.txt" />
   </ItemGroup>
