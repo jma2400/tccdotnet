@@ -41,8 +41,8 @@ LPAREN		-> @"\(";
 RPAREN		-> @"\)";
 LBRACE		-> @"\{";
 RBRACE		-> @"\}";
-LARRAY		-> @"\[";
-RARRAY		-> @"\]";
+LBRACKET	-> @"\[";
+RBRACKET	-> @"\]";
 RELOP	       -> @">=|<=|==|!=|>|<";
 LOGOP		-> @"&&|\|\|";
 INCREDECRE	-> @"\+\+|\-\-";
@@ -86,12 +86,12 @@ Pointer	-> ASTERISK+;
 ArithmeticOperator -> PLUS | MINUS | ASTERISK | FSLASH | PERCENT;
 
 //Array Declaration
-Array		 -> (LARRAY NUMBER RARRAY)+ ArrAssignment?;	
+Array		 -> (LBRACKET NUMBER RBRACKET)+ ArrAssignment?;	
 ArrAssignment	 -> EQUALS LBRACE ArrContent RBRACE;
 ArrContent	 -> (STRING|Char) (COMMA (STRING|Char))*;
 
 //Calling Variable Array
-VarArray	 ->(LARRAY (NUMBER|IDENTIFIER) RARRAY)*;
+VarArray	 ->(LBRACKET (NUMBER|IDENTIFIER) RBRACKET)*;
 
 //Function? is exluded from LocalDecl
 LocalDecl 	 -> DATATYPE Pointer? IDENTIFIER Array? DecAssignment?(COMMA Pointer? IDENTIFIER Array? DecAssignment?)* SEMICOL;
@@ -105,7 +105,7 @@ Identifier     -> INCREDECRE? IDENTIFIER INCREDECRE? (LPAREN ParPass RPAREN)?;
 ParPass	 -> REFOPER? IDENTIFIER (COMMA REFOPER? IDENTIFIER)*;
 Function 	 -> LPAREN (Parameters|VOID)? RPAREN (SEMICOL|CodeBlock);
 Parameters 	 -> (DATATYPE Pointer? IDENTIFIER ParArray?)(COMMA ((DATATYPE Pointer? IDENTIFIER ParArray?)|VARIABLEPARAMS))*;
-ParArray	 -> (LARRAY NUMBER RARRAY)*;
+ParArray	 -> (RBRACKET NUMBER RBRACKET)*;
 CodeBlock	 -> BOOL|(LBRACE Statement* RBRACE);
 Break		 -> BREAK SEMICOL;
 
