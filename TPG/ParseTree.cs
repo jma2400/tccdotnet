@@ -191,9 +191,6 @@ namespace tccdotnet
                 case TokenType.Expr:
                     Value = EvalExpr(tree, paramlist);
                     break;
-                case TokenType.Char:
-                    Value = EvalChar(tree, paramlist);
-                    break;
                 case TokenType.Atom:
                     Value = EvalAtom(tree, paramlist);
                     break;
@@ -356,11 +353,6 @@ namespace tccdotnet
         }
 
         protected virtual object EvalExpr(ParseTree tree, params object[] paramlist)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected virtual object EvalChar(ParseTree tree, params object[] paramlist)
         {
             throw new NotImplementedException();
         }
