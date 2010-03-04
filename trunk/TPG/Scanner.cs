@@ -123,6 +123,10 @@ namespace tccdotnet
             Patterns.Add(TokenType.CHARVALUE, regex);
             Tokens.Add(TokenType.CHARVALUE);
 
+            regex = new Regex(@"[0-9]\.[0-9]+", RegexOptions.Compiled);
+            Patterns.Add(TokenType.FLOATVALUE, regex);
+            Tokens.Add(TokenType.FLOATVALUE);
+
             regex = new Regex(@"\+", RegexOptions.Compiled);
             Patterns.Add(TokenType.PLUS, regex);
             Tokens.Add(TokenType.PLUS);
@@ -443,38 +447,39 @@ namespace tccdotnet
             REFOPER = 65,
             IDENTIFIER= 66,
             CHARVALUE= 67,
-            PLUS    = 68,
-            MINUS   = 69,
-            ASTERISK= 70,
-            FSLASH  = 71,
-            PERCENT = 72,
-            NUMBER  = 73,
-            QUOT    = 74,
-            DQUOT   = 75,
-            COMMA   = 76,
-            EQUALS  = 77,
-            SEMICOL = 78,
-            COLON   = 79,
-            SHARP   = 80,
-            EOF     = 81,
-            LPAREN  = 82,
-            RPAREN  = 83,
-            LBRACE  = 84,
-            RBRACE  = 85,
-            LBRACKET= 86,
-            RBRACKET= 87,
-            RELOP   = 88,
-            LOGOP   = 89,
-            INCREDECRE= 90,
-            BOOL    = 91,
-            NOT     = 92,
-            NULL    = 93,
-            STRING  = 94,
-            VARIABLEPARAMS= 95,
-            WHITESPACE= 96,
-            EOL     = 97,
-            COMMENTLINE= 98,
-            COMMENTBLOCK= 99
+            FLOATVALUE= 68,
+            PLUS    = 69,
+            MINUS   = 70,
+            ASTERISK= 71,
+            FSLASH  = 72,
+            PERCENT = 73,
+            NUMBER  = 74,
+            QUOT    = 75,
+            DQUOT   = 76,
+            COMMA   = 77,
+            EQUALS  = 78,
+            SEMICOL = 79,
+            COLON   = 80,
+            SHARP   = 81,
+            EOF     = 82,
+            LPAREN  = 83,
+            RPAREN  = 84,
+            LBRACE  = 85,
+            RBRACE  = 86,
+            LBRACKET= 87,
+            RBRACKET= 88,
+            RELOP   = 89,
+            LOGOP   = 90,
+            INCREDECRE= 91,
+            BOOL    = 92,
+            NOT     = 93,
+            NULL    = 94,
+            STRING  = 95,
+            VARIABLEPARAMS= 96,
+            WHITESPACE= 97,
+            EOL     = 98,
+            COMMENTLINE= 99,
+            COMMENTBLOCK= 100
     }
 
     public class Token
