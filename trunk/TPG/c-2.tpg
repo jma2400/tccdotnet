@@ -76,7 +76,13 @@ Header 	 -> SHARP INCLUDE DIRECTIVE;
 
 GlobalDecl 	 -> (DATATYPE|VOID)? Pointer? IDENTIFIER (Function? | (Array|DecAssignment)? (COMMA Pointer? IDENTIFIER Array? DecAssignment?)* SEMICOL);
 
+/* Pointer. Double-referencing pointer is possible in C */
 Pointer	-> ASTERISK+;
+
+/* 
+ * Arithmetic operators. 
+ * -- Types: Add, Subtract, Multiply, Divide, Modulus 
+ */
 ArithmeticOperator -> PLUS | MINUS | ASTERISK | FSLASH | PERCENT;
 
 //Array Declaration
