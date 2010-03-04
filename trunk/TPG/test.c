@@ -1,5 +1,10 @@
 #include<stdio.h>
+char x='2';
+char x=2;
+char y='x9';
+
 int x[20]={"X"},t=2,c,f,g,e=2;int y;
+int y[2] = {2,3,4};
 float *we=2;
 char str[100]={"peter", "aivan", "pj"};
 
