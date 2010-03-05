@@ -14,3 +14,11 @@ C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\
 C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Debug\tccdotnet.exe
 C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Debug\tccdotnet.pdb
 C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.pdb
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.exe
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.pdb
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Debug\tccdotnet.exe
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Debug\tccdotnet.pdb
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\ResolveAssemblyReference.cache
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.Form1.resources
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.Properties.Resources.resources
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Debug\tccdotnet.csproj.GenerateResource.Cache

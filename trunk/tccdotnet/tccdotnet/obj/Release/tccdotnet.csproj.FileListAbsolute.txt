@@ -24,3 +24,16 @@ C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\
 C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.SyntaxDocument.dll
 C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.SyntaxFiles.dll
 C:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.pdb
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\tccdotnet.exe
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\tccdotnet.pdb
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.CodeEditor.dll
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.Docking.dll
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.Scripting.ScriptRun.dll
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.SyntaxDocument.dll
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\bin\Release\AIMS.SyntaxFiles.dll
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\ResolveAssemblyReference.cache
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.Form1.resources
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.Properties.Resources.resources
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.csproj.GenerateResource.Cache
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.exe
+D:\Documents and Settings\PJ\My Documents\Visual Studio 2008\Projects\tccdotnet\tccdotnet\obj\Release\tccdotnet.pdb
