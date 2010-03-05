@@ -123,7 +123,7 @@ namespace tccdotnet
             Patterns.Add(TokenType.CHARVALUE, regex);
             Tokens.Add(TokenType.CHARVALUE);
 
-            regex = new Regex(@"[0-9]\.[0-9]+", RegexOptions.Compiled);
+            regex = new Regex(@"[0-9]+\.[0-9]+", RegexOptions.Compiled);
             Patterns.Add(TokenType.FLOATVALUE, regex);
             Tokens.Add(TokenType.FLOATVALUE);
 
